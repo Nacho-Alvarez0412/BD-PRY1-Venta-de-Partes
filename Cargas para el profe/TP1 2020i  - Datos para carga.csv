@@ -1,0 +1,67 @@
+Estados de un cliente
+estado
+ACTIVO
+INACTIVO
+SUSPENDIDO
+
+Fabricantes de automóviles
+nombre
+Toyota
+Nissan
+BMW
+Mazda
+Volkswagen
+Mitsubishi
+
+Tipos de automóviles
+fabricante;modelo;anno;detalle
+BMW;F18;2011;5 Series long wheelbase
+BMW;X6 M;2015;Sports Activity Coupe
+Mazda;CX-5;2012;Compact crossover SUV
+Mazda;Mazda 6;2014;Family sedan
+Mitsubishi;Lancer;2013;Small sedan
+Mitsubishi;Pajero;2008;Sophisticated full-time dual-range 4WD
+Mitsubishi;Eclipse;2010;Sport coupe
+Nissan;Sentra;2007;Compact
+Nissan;X-Trail;2015;Mid-size crossover
+Nissan;Terrano;2012;Crossover
+Nissan;Murano;2015;Mid-size crossover
+Toyota;Yaris;2008;Subcompact
+Toyota;Prius;2011;Full hybrid electric mid-size hatchback
+Toyota;Camry;2015;Mid-size sedan
+Toyota;Corolla;2010;Compact
+Volkswagen;Golf;2011;Compact
+Volkswagen;Fox;2013;Hatchback
+
+Proveedores
+nombre;direccion;ciudad;contacto;telefono
+Auto Repuestos Jiménez;Pavas;San José;Sergio Mancilla Alfonso;65033078
+Repuestos Zúñiga;700 m N peaje;Naranjo;Ruben Mir Mestres;61840940
+J y A Autopartes;Plaza Ferias;Alajuela;Marina Paez Melgarejo;61219649
+Servicios Omega;200m S Palí;Grecia;Felipe Escudero Andrades;84676801
+Repuestos ABZ;250 O Mercado Municipal;Puntarenas;Marcos Vara Rua;88404529
+Autopartes USA;300 sur parque;Limón;Diego Teran Quintela;78607436
+Super Repuestos;150 E Plaza Santa Rosa;Liberia;Irene Carranza Pellicer;74502614
+Megapartes Martínez;Parque Los Ángeles;Heredia;Beatriz Lucena Duque;74039438
+LACOR Repuestos;350m E Basílica;Cartago;Eva Palacios Alejo;72126866
+Autopartes Mandi;150m E Mall El Dorado;Guadalupe;Francisco Jose Salguero Bruno;69495933
+
+Fabricantes de partes
+nombre
+International Spare Parts
+Auto Spare Parts
+AJS Auto Parts
+Discounted Parts
+
+Marcas de partes
+marca
+Delphi
+Falken
+Kelly
+Bondo
+Goyo
+Koni
+Kleber
+Fuller
+Armstrong
+Walker
