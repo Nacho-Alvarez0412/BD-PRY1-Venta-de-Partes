@@ -27,6 +27,7 @@ public class ConnectionManager {
     public static String user;
     public static String password;
     public ErrorManager errorManager;
+    public ClientManager clientManager;
     
     
     public ConnectionManager(String url, String user, String password){
@@ -34,6 +35,7 @@ public class ConnectionManager {
         this.user = user;
         this.password = password;
         this.errorManager = new ErrorManager(this);
+        this.clientManager = new ClientManager(this);
     }
     
     public ArrayList<String> getDatabaseMetaData() throws SQLException
@@ -145,7 +147,9 @@ public class ConnectionManager {
     }
     
     
-    public void getRows2Variables(String table, String column1, String value1, String column2, String value2){
+    public ArrayList<String> getRows2Variables(String table, String column1, String value1, String column2, String value2){
+        ArrayList<String> row = new ArrayList<>();
+        
         try {
             Statement sqlStatement = connection.createStatement();
 
@@ -166,9 +170,8 @@ public class ConnectionManager {
 
                 for(int i = 1 ; i <= columnsNumber; i++){
 
-                    System.out.print(rs.getString(i) + " ");
+                    row.add(rs.getString(i));
                 }
-                System.out.println();
             }
 
             rs.close();
@@ -176,11 +179,12 @@ public class ConnectionManager {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+        return row;  
     }
         
     
-    public void getRows1Variable(String table, String column1, String value1){
+    public ArrayList<String> getRows1Variable(String table, String column1, String value1){
+        ArrayList<String> row = new ArrayList<>();
         try {
             Statement sqlStatement = connection.createStatement();
 
@@ -200,10 +204,9 @@ public class ConnectionManager {
             while (rs.next()) {
 
                 for(int i = 1 ; i <= columnsNumber; i++){
-
-                    System.out.print(rs.getString(i) + " ");
+                    row.add(rs.getString(i));
+                    
                 }
-                System.out.println();
             }
 
             rs.close();
@@ -211,7 +214,7 @@ public class ConnectionManager {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+         return row;   
     }
     
     
@@ -237,8 +240,8 @@ public class ConnectionManager {
         return null;
     }
     
-    public void insertRow(ArrayList<String> values, String table){
-        
+    public int insertRow(ArrayList<String> values, String table){
+        int key = 0;
         try {
             Statement sqlStatement = connection.createStatement();
             
@@ -261,14 +264,23 @@ public class ConnectionManager {
             System.out.println("\nQuery string:");
             System.out.println(queryString);
             
-            sqlStatement.execute(queryString);
+            sqlStatement.execute(queryString,Statement.RETURN_GENERATED_KEYS);
+            
+            ResultSet rs = sqlStatement.getGeneratedKeys();
+            if ( rs.next() ) {
+                // Retrieve the auto generated key(s).
+                key = rs.getInt(1);
+            }
             
             System.out.println("Row added in table: "+table);
+            
+            
         } 
         
         catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return key;
     }
     
     public void updateRow(String table, String column, String referenceColumn,String referenceValue, String newValue){

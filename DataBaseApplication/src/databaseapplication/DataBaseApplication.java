@@ -21,9 +21,9 @@ public class DataBaseApplication {
     public static void main(String[] args) {
         
         
-        String url = "jdbc:sqlserver://localhost:1433;databasename=VentaAutos";
-        String user = "SA";
-        String password = "<B4b0rsh162715>";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=Venta de Partes";
+        String user = "Nacho1";
+        String password = "1234";
         
         try {
             
@@ -31,40 +31,49 @@ public class DataBaseApplication {
             ConnectionManager databaseConnection = new ConnectionManager(url,user,password);
             databaseConnection.connect();
             
-            //Get Table
-            databaseConnection.getTable("Proveedor");
-            //Get rows from a table
-            databaseConnection.getColumnFromTable("Automóvil", "Modelo");
             
-            //Get specific rows from a table from one and two columns
+            //databaseConnection.clientManager.changeClientState("10", "Suspendido");
             
-            databaseConnection.getRows2Variables("Automóvil", "Modelo", "'Fox'", "Año", "2013");
-            databaseConnection.getRows1Variable("Automóvil", "Modelo", "'Sentra'");
+            /*
+            ArrayList<String> persona = new ArrayList<>();
+            persona.add("118090060");
+            persona.add("'Ignacio Alvarez'");
+            persona.add("'Heredia,Costa Rica'");
+            persona.add("'Heredia'");
+            persona.add("89288339");
+            databaseConnection.clientManager.insertPerson(persona);
+           */
             
-            
-            
-            //Delete
-            //String output = databaseConnection.deleteRow("hola", "Modelo", "Automóvil");
-            //System.out.println(output);
-            
-            
-            // En el insert, se le pasa una lista de los strings que son los datos que van en las columnas
-            //El numero de la lista tiene que ser igual al de las columnas que se llenan
-            //Si el dato son palabras, se la añaden '' al string, ejemplo de String: " ' Ejemplo ' ";
-            //Si el dato es un numero, no se añade nada, ejemplo: " 1234 "
-            
-            ArrayList<String> listOfValues = new ArrayList<String>();
-            listOfValues.add("'Lexus CT'");
-            listOfValues.add("2019");
-            listOfValues.add("'Full extras'");
-            listOfValues.add("1");
-            
-            //Insert
-           // databaseConnection.insertRow(listOfValues, "Automóvil");
+            /*
+            ArrayList<String> organizacion = new ArrayList<>();
+            organizacion.add("1118090060");
+            organizacion.add("'Gambobaby Music'");
+            organizacion.add("'San Jose,Costa Rica'");
+            organizacion.add("'San Jose'");
+            databaseConnection.clientManager.insertOrganization(organizacion);
+           */
            
-           //Update Row
-           //databaseConnection.updateRow("Cliente", "Estado", "ClienteID", "13", "'Activo'");
-           
+            /*
+            ArrayList<String> contacto = new ArrayList<>();
+            contacto.add("'Gambobaby Music'");
+            contacto.add("'Sebastian Gamboa'");
+            contacto.add("'12345678'");
+            contacto.add("'C.E.O'");
+            databaseConnection.clientManager.insertContact(contacto);
+            */
+            
+            /*
+            ArrayList<String> cambios = new ArrayList<>();
+            cambios.add("Nombre");
+            cambios.add("'Juan Ignacio Alvarez'");
+            cambios.add("Ciudad");
+            cambios.add("'Cartago'");
+            databaseConnection.clientManager.modifyClient("118090060", cambios);
+            
+            */
+            
+            //databaseConnection.deleteRow("Suspendido", "Estado", "Cliente");
+            
             //Disconnect
             databaseConnection.disconnect();
             
