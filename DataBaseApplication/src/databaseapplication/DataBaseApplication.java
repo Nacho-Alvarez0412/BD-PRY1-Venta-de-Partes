@@ -7,6 +7,7 @@ package databaseapplication;
 
 import Model.ConnectionManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,19 +29,37 @@ public class DataBaseApplication {
         
         try {
             
+            //Connect
             ConnectionManager databaseConnection = new ConnectionManager(url,user,password);
             databaseConnection.connect();
+            
+            //Get Table
             databaseConnection.getTable("Proveedor");
-            String output = databaseConnection.deleteRow("1999", "Año", "Automóvil");
+            
+            
+            //Delete
+            String output = databaseConnection.deleteRow("hola", "Modelo", "Automóvil");
             System.out.println(output);
+            
+            
+            // En el insert, se le pasa una lista de los strings que son los datos que van en las columnas
+            //El numero de la lista tiene que ser igual al de las columnas que se llenan
+            //Si el dato son palabras, se la añaden '' al string, ejemplo de String: " ' Ejemplo ' ";
+            //Si el dato es un numero, no se añade nada, ejemplo: " 1234 "
+            
+            ArrayList<String> listOfValues = new ArrayList<String>();
+            listOfValues.add("'Lexus CT'");
+            listOfValues.add("2019");
+            listOfValues.add("'Full extras'");
+            listOfValues.add("1");
+            
+            //Insert
+            databaseConnection.insertRow(listOfValues, "Automóvil");
+            
+            //Disconnect
             databaseConnection.disconnect();
             
-            /*queryString = "";
-            queryString+="INSERT INTO Cliente (Estado) VALUES ('2');";
-            queryString+="INSERT INTO Cliente (Estado) VALUES ('Activo');";
-            queryString+="INSERT INTO Cliente (Estado) VALUES ('3');";
             
-            sqlStatement.execute(queryString);*/
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseApplication.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,10 +21,10 @@ import java.sql.ResultSetMetaData;
  */
 public class ConnectionManager {
     
-    public Connection connection;
-    public String url;
-    public String user;
-    public String password;
+    private Connection connection;
+    public static String url;
+    public static String user;
+    public static String password;
     
     
     public ConnectionManager(String url, String user, String password){
@@ -94,7 +95,7 @@ public class ConnectionManager {
             Statement sqlStatement = connection.createStatement();
             
             String queryString = "";
-            queryString+="DELETE FROM "+table+ " WHERE "+column+" = "+row+ ";";
+            queryString+="DELETE FROM "+table+ " WHERE "+column+" = "+"'"+row+"'"+ ";";
             
             System.out.println("\nQuery string:");
             System.out.println(queryString);
@@ -110,4 +111,37 @@ public class ConnectionManager {
         return null;
     }
     
+    public void insertRow(ArrayList<String> values, String table){
+        
+        try {
+            Statement sqlStatement = connection.createStatement();
+            
+            String queryString = "";
+            queryString+="INSERT INTO "+table+" Values (";
+            
+            
+            
+            for (int i = 0; i < values.size(); i++) {
+                
+                queryString+=values.get(i);
+                
+                if(i != values.size()-1){
+                   queryString+=" ,";
+                }
+            }
+            
+           queryString+=")"; 
+            
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+            
+            sqlStatement.execute(queryString);
+            
+            System.out.println("Row added in table: "+table);
+        } 
+        
+        catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
