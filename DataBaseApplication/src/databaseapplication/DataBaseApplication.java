@@ -23,9 +23,9 @@ public class DataBaseApplication {
     public static void main(String[] args) {
         
         
-        String url = "jdbc:sqlserver://localhost:1433;databasename=VentaAutos";
-        String user = "SA";
-        String password = "<B4b0rsh162715>";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=Venta de Partes";
+        String user = "Nacho1";
+        String password = "1234";
         
         try {
             
@@ -37,9 +37,10 @@ public class DataBaseApplication {
             databaseConnection.getTable("Proveedor");
             
             
+            
             //Delete
-            String output = databaseConnection.deleteRow("hola", "Modelo", "Automóvil");
-            System.out.println(output);
+            //String output = databaseConnection.deleteRow("hola", "Modelo", "Automóvil");
+            //System.out.println(output);
             
             
             // En el insert, se le pasa una lista de los strings que son los datos que van en las columnas
@@ -54,14 +55,15 @@ public class DataBaseApplication {
             listOfValues.add("1");
             
             //Insert
-            databaseConnection.insertRow(listOfValues, "Automóvil");
             
+           // databaseConnection.insertRow(listOfValues, "Automóvil");
+           
             //Disconnect
             databaseConnection.disconnect();
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(DataBaseApplication.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
     }
