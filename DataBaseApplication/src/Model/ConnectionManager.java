@@ -50,6 +50,7 @@ public class ConnectionManager {
     }
     
     public void connect(){
+        
         try {
             
             connection = DriverManager.getConnection(url, user, password);
@@ -111,6 +112,109 @@ public class ConnectionManager {
         return null;
     }
     
+    
+    public String getColumnFromTable(String table, String column){
+        
+        try {
+            Statement sqlStatement = connection.createStatement();
+
+            ResultSet rs = null;
+
+            String queryString = "";
+            queryString+="SELECT "+column+ " FROM "+table;
+
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+
+            rs=sqlStatement.executeQuery(queryString);
+                
+
+            while (rs.next()) {
+
+                System.out.println(rs.getString(column));
+            }
+
+            rs.close();
+            return table;
+        
+        }  
+        catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    public void getRows2Variables(String table, String column1, String value1, String column2, String value2){
+        try {
+            Statement sqlStatement = connection.createStatement();
+
+            ResultSet rs = null;
+
+            String queryString = "";
+            queryString+="SELECT * FROM "+table+" WHERE "+column1+" = "+value1+ " AND "+column2+" = "+value2+";";
+
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+
+            rs=sqlStatement.executeQuery(queryString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnsNumber = rsmd.getColumnCount();       
+
+            while (rs.next()) {
+
+                for(int i = 1 ; i <= columnsNumber; i++){
+
+                    System.out.print(rs.getString(i) + " ");
+                }
+                System.out.println();
+            }
+
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+        
+    
+    public void getRows1Variable(String table, String column1, String value1){
+        try {
+            Statement sqlStatement = connection.createStatement();
+
+            ResultSet rs = null;
+
+            String queryString = "";
+            queryString+="SELECT * FROM "+table+" WHERE "+column1+" = "+value1+";";
+
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+
+            rs=sqlStatement.executeQuery(queryString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnsNumber = rsmd.getColumnCount();       
+
+            while (rs.next()) {
+
+                for(int i = 1 ; i <= columnsNumber; i++){
+
+                    System.out.print(rs.getString(i) + " ");
+                }
+                System.out.println();
+            }
+
+            rs.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+    
+    
     public String deleteRow(String row, String column, String table){
         
         try {
@@ -163,6 +267,26 @@ public class ConnectionManager {
         } 
         
         catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateRow(String table, String column, String referenceColumn,String referenceValue, String newValue){
+        try {
+            
+            Statement sqlStatement = connection.createStatement();
+            
+            String queryString = "";
+            queryString+="UPDATE "+table+" SET "+ column + " = "+ newValue + " WHERE "+ referenceColumn + " = "+referenceValue+";";
+            
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+            
+            sqlStatement.execute(queryString);
+            
+            System.out.println(table+ " updated");
+            
+        } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

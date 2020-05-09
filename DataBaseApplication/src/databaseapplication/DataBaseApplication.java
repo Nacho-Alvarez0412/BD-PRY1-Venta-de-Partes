@@ -8,8 +8,6 @@ package databaseapplication;
 import Model.ConnectionManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,9 +21,9 @@ public class DataBaseApplication {
     public static void main(String[] args) {
         
         
-        String url = "jdbc:sqlserver://localhost:1433;databasename=Venta de Partes";
-        String user = "Nacho1";
-        String password = "1234";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=VentaAutos";
+        String user = "SA";
+        String password = "<B4b0rsh162715>";
         
         try {
             
@@ -35,6 +33,13 @@ public class DataBaseApplication {
             
             //Get Table
             databaseConnection.getTable("Proveedor");
+            //Get rows from a table
+            databaseConnection.getColumnFromTable("Automóvil", "Modelo");
+            
+            //Get specific rows from a table from one and two columns
+            
+            databaseConnection.getRows2Variables("Automóvil", "Modelo", "'Fox'", "Año", "2013");
+            databaseConnection.getRows1Variable("Automóvil", "Modelo", "'Sentra'");
             
             
             
@@ -55,15 +60,17 @@ public class DataBaseApplication {
             listOfValues.add("1");
             
             //Insert
-            
            // databaseConnection.insertRow(listOfValues, "Automóvil");
+           
+           //Update Row
+           //databaseConnection.updateRow("Cliente", "Estado", "ClienteID", "13", "'Activo'");
            
             //Disconnect
             databaseConnection.disconnect();
             
             
         } catch (SQLException ex) {
-            
+            System.out.println(ex);
         }
         
     }
