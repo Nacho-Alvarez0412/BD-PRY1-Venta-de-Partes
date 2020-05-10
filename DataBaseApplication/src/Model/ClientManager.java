@@ -66,10 +66,19 @@ public class ClientManager {
         databaseConnection.insertRow(parameters, "Contacto");
     }
     
-    public void changeClientState(String ID,String newState) throws SQLException{
-        newState = "'"+newState+"'";
+    public void changeClientState(String clientID,String newState) throws SQLException{
         
-        databaseConnection.updateRow("Cliente", "Estado", "ClienteID", ID, newState);
+        newState = "'"+newState+"'";
+        ArrayList<String> rowInfo;
+        
+        if(clientID.length() == 9){
+            rowInfo = databaseConnection.getRows1Variable("Persona", "Cedula", clientID);
+        }
+        else{
+            rowInfo = databaseConnection.getRows1Variable("Organización", "Cedula", clientID);
+        }
+        
+        databaseConnection.updateRow("Cliente", "Estado", "ClienteID", rowInfo.get(4), newState);
         
         System.out.println("Client state Change");
         

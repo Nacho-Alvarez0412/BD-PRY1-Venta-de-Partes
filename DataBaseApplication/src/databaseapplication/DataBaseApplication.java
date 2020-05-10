@@ -32,7 +32,7 @@ public class DataBaseApplication {
             databaseConnection.connect();
             
             
-            //databaseConnection.clientManager.changeClientState("10", "Suspendido");
+            //databaseConnection.clientManager.changeClientState("1118090060", "Suspendido");
             
             /*
             ArrayList<String> persona = new ArrayList<>();
