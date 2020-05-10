@@ -91,9 +91,7 @@ public class ClientManager {
             for (int i = 0 ; i < newInfo.size() ; i++){
                 databaseConnection.updateRow("Organizacion", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
             }
-        }
-        
-        
+        }  
     }
     
     public void listClients() throws SQLException{

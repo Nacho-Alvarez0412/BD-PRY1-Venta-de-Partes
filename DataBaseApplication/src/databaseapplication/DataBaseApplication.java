@@ -21,9 +21,9 @@ public class DataBaseApplication {
     public static void main(String[] args) {
         
         
-        String url = "jdbc:sqlserver://localhost:1433;databasename=Venta de Partes";
-        String user = "Nacho1";
-        String password = "1234";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=VentaAutos";
+        String user = "SA";
+        String password = "<B4b0rsh162715>";
         
         try {
             
@@ -69,10 +69,16 @@ public class DataBaseApplication {
             cambios.add("Ciudad");
             cambios.add("'Cartago'");
             databaseConnection.clientManager.modifyClient("118090060", cambios);
-            
             */
             
-            //databaseConnection.deleteRow("Suspendido", "Estado", "Cliente");
+            //Pruebas clase PartManager
+            
+            //databaseConnection.PartManager.insertPart("'Pistones'", "'International Spare Parts'", "'Fuller'");
+            //databaseConnection.PartManager.erasePart("Llanta");
+            //databaseConnection.PartManager.insertProvision("'J y A Autopartes'", "'Llanta'", "3000", "1000");
+            //databaseConnection.PartManager.linkPartWithVehicle("'Pistones'", "'Sentra'", "2007");
+            //databaseConnection.PartManager.updatePrices("'J y A Autopartes'", "'Llanta'", "4000", "1500");
+            //databaseConnection.PartManager.listPartsByVehicle("'Sentra'", "2007");
             
             //Disconnect
             databaseConnection.disconnect();

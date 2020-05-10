@@ -28,6 +28,7 @@ public class ConnectionManager {
     public static String password;
     public ErrorManager errorManager;
     public ClientManager clientManager;
+    public PartManager PartManager;
     
     
     public ConnectionManager(String url, String user, String password){
@@ -36,6 +37,7 @@ public class ConnectionManager {
         this.password = password;
         this.errorManager = new ErrorManager(this);
         this.clientManager = new ClientManager(this);
+        this.PartManager = new PartManager(this);
     }
     
     public ArrayList<String> getDatabaseMetaData() throws SQLException
@@ -290,6 +292,29 @@ public class ConnectionManager {
             
             String queryString = "";
             queryString+="UPDATE "+table+" SET "+ column + " = "+ newValue + " WHERE "+ referenceColumn + " = "+referenceValue+";";
+            
+            System.out.println("\nQuery string:");
+            System.out.println(queryString);
+            
+            sqlStatement.execute(queryString);
+            
+            System.out.println(table+ " updated");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateRow2Variables(String table, String newColumn, String newValue,
+            String referenceColumn,String referenceValue,String referenceColumn2,String referenceValue2){
+        try {
+            
+            Statement sqlStatement = connection.createStatement();
+            
+            String queryString = "";
+            queryString+="UPDATE "+table+" SET "+ newColumn + " = "+ newValue + 
+                    " WHERE "+ referenceColumn + " = "+referenceValue+" AND "+
+                    referenceColumn2 + " = "+referenceValue2+";";
             
             System.out.println("\nQuery string:");
             System.out.println(queryString);
