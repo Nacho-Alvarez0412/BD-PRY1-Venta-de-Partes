@@ -73,12 +73,20 @@ public class DataBaseApplication {
             
             //Pruebas clase PartManager
             
-            //databaseConnection.PartManager.insertPart("'Pistones'", "'International Spare Parts'", "'Fuller'");
-            //databaseConnection.PartManager.erasePart("Llanta");
-            //databaseConnection.PartManager.insertProvision("'J y A Autopartes'", "'Llanta'", "3000", "1000");
-            //databaseConnection.PartManager.linkPartWithVehicle("'Pistones'", "'Sentra'", "2007");
-            //databaseConnection.PartManager.updatePrices("'J y A Autopartes'", "'Llanta'", "4000", "1500");
-            //databaseConnection.PartManager.listPartsByVehicle("'Sentra'", "2007");
+            //databaseConnection.partManager.insertPart("'Pistones'", "'International Spare Parts'", "'Fuller'");
+            //databaseConnection.partManager.erasePart("Llanta");
+            //databaseConnection.partManager.insertProvision("'J y A Autopartes'", "'Llanta'", "3000", "1000");
+            //databaseConnection.partManager.linkPartWithVehicle("'Pistones'", "'Sentra'", "2007");
+            //databaseConnection.partManager.updatePrices("'J y A Autopartes'", "'Llanta'", "4000", "1500");
+            //databaseConnection.partManager.listPartsByVehicle("'Sentra'", "2007");
+            
+            
+            //Pruebas clase OrderManager
+            
+           //databaseConnection.orderManager.listProvidersByPart("'Motor'");
+           //databaseConnection.orderManager.insertOrder("1118090060", "'2020-05-09'", "6575", "1325");
+           //databaseConnection.orderManager.linkDetailToOrder("1118090060",  "'2020-05-09'", "20", "'Llanta'", "'J y A Autopartes'");
+            
             
             //Disconnect
             databaseConnection.disconnect();

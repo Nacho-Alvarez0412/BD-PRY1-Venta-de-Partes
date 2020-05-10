@@ -28,7 +28,8 @@ public class ConnectionManager {
     public static String password;
     public ErrorManager errorManager;
     public ClientManager clientManager;
-    public PartManager PartManager;
+    public PartManager partManager;
+    public OrderManager orderManager;
     
     
     public ConnectionManager(String url, String user, String password){
@@ -37,7 +38,8 @@ public class ConnectionManager {
         this.password = password;
         this.errorManager = new ErrorManager(this);
         this.clientManager = new ClientManager(this);
-        this.PartManager = new PartManager(this);
+        this.partManager = new PartManager(this);
+        this.orderManager = new OrderManager(this);
     }
     
     public ArrayList<String> getDatabaseMetaData() throws SQLException
