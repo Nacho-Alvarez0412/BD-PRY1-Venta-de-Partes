@@ -29,21 +29,30 @@ public class PartManager {
         return row.get(0);
     }
     
-    public void insertPart(String partName, String nombreFabricante, String nombreMarca){
-        
-        ArrayList<String> values = new ArrayList<String>();
-        
-        values.add(partName);
-        values.add(this.getProducerID(nombreFabricante));
-        values.add(this.getBrandID(nombreMarca));
-        
-        databaseConnection.insertRow(values, "Parte");
+    public String insertPart(String partName, String nombreFabricante, String nombreMarca){
+        if(!databaseConnection.errorManager.checkPartExistence(partName))
+            return "La parte ingresada ya existe en la base de datos";
+        if(databaseConnection.errorManager.checkPartIntegrity(nombreMarca, nombreFabricante)){
+            ArrayList<String> values = new ArrayList<String>();
+
+            values.add(partName);
+            values.add(this.getProducerID(nombreFabricante));
+            values.add(this.getBrandID(nombreMarca));
+
+            databaseConnection.insertRow(values, "Parte");
+            return "Parte agregada con éxito";
+        }
+        return "La marca o fabricante no se encuentra en la base de datos";
     }
     
-    public void erasePart(String partName){
-        
-        databaseConnection.deleteRow(partName, "NombreParte", "Parte");
-        System.out.println("Part "+partName+" deleted");
+    public String erasePart(String partName){
+        if(databaseConnection.errorManager.checkPartDependencies(partName)){
+            databaseConnection.deleteRow(partName, "NombreParte", "Parte");
+            return "Part "+partName+" deleted";
+        }
+        else{
+            return "La parte no puede ser borrada, ya que forma parte de una orden";
+        }
     }
     
     
@@ -57,16 +66,19 @@ public class PartManager {
         return row.get(0);
     }
     
-    public void insertProvision(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
+    public String insertProvision(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
+        if(!databaseConnection.errorManager.checkProvisionIntegrity(nombreProveedor, nombreParte)){
+            ArrayList<String> values = new ArrayList<String>();
+
+            values.add(this.getProviderID(nombreProveedor));
+            values.add(this.getPartID(nombreParte));
+            values.add(precioCompra);
+            values.add(ganancia);
+            databaseConnection.insertRow(values, "Provision");
+            return "Relación creada con éxito";
+        }
         
-        ArrayList<String> values = new ArrayList<String>();
-        
-        values.add(this.getProviderID(nombreProveedor));
-        values.add(this.getPartID(nombreParte));
-        values.add(precioCompra);
-        values.add(ganancia);
-        
-        databaseConnection.insertRow(values, "Provision");
+        return "Verifique el proveedor o la parte y vuelva a intentar";
     }
     
     private String getVehicleID(String modelo, String año){
@@ -74,50 +86,56 @@ public class PartManager {
         return row.get(0);
     }
     
-    public void linkPartWithVehicle(String nombreParte,String modelo,String año){
-        
-        ArrayList<String> values = new ArrayList<String>();
-        
-        values.add(this.getVehicleID(modelo, año));
-        values.add(this.getPartID(nombreParte));
-        
-        databaseConnection.insertRow(values, "Compone");
+    public String linkPartWithVehicle(String nombreParte,String modelo,String año){
+        if(!databaseConnection.errorManager.checkComposeIntegrity(modelo, año, nombreParte)){
+            ArrayList<String> values = new ArrayList<>();
+
+            values.add(this.getVehicleID(modelo, año));
+            values.add(this.getPartID(nombreParte));
+
+            databaseConnection.insertRow(values, "Compone");
+            return "Relación creada con éxito";
+        }
+        return "Verifique los valores de parte y vehículo y vuelva a intentar";
     }
     
-    public void updatePrices(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
-        
-        String providerID = this.getProviderID(nombreProveedor);
-        String partID = this.getPartID(nombreParte);
-        
-        databaseConnection.updateRow2Variables("Provision", "PrecioCompra", precioCompra,"ProveedorID", providerID, "ParteID", partID);
-        databaseConnection.updateRow2Variables("Provision", "Ganancia", ganancia,"ProveedorID", providerID, "ParteID", partID);
+    public String updatePrices(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
+        if(!databaseConnection.errorManager.checkUpdateIntegrity(nombreProveedor, nombreParte)){
+            String providerID = this.getProviderID(nombreProveedor);
+            String partID = this.getPartID(nombreParte);
+
+            databaseConnection.updateRow2Variables("Provision", "PrecioCompra", precioCompra,"ProveedorID", providerID, "ParteID", partID);
+            databaseConnection.updateRow2Variables("Provision", "Ganancia", ganancia,"ProveedorID", providerID, "ParteID", partID);
+            return "Datos actualizados con éxito";
+        }
+        return "Verifique los valores de parte y proveedor y vuelva a intentar";
     }
     
-    private String getPartIdByVehicle(String vehicleID){
+    private ArrayList<String> getPartIdByVehicle(String vehicleID){
         ArrayList<String> row = databaseConnection.getRows1Variable("Compone", "AutomovilID", vehicleID);
-        return row.get(1);
-    }
-    
-    public void listPartsByVehicle(String modelo, String año){
-        
-        String vehicleID = this.getVehicleID(modelo, año);
-        
-        String partID = this.getPartIdByVehicle(vehicleID);
-        
-        ArrayList<String> parts = databaseConnection.getRows1Variable("Parte", "ParteID", partID);
-        
-        int counter = 0;
-        
-        for (int i = 0; i < parts.size(); i++) {
-            
-            System.out.print(parts.get(i) + "\t");
-            counter++;
-            
-            if (counter == 4){
-                System.out.println(" ");
-                counter = 0;
-            }
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0 ; i < row.size() ; i++){
+            i++;
+            result.add(row.get(i));
         }
         
+        return result;
+    }
+    
+    public String listPartsByVehicle(String modelo, String año){
+        if(!databaseConnection.errorManager.isCar(modelo, año)){
+            String vehicleID = this.getVehicleID(modelo, año);
+
+            ArrayList<String> partsID = this.getPartIdByVehicle(vehicleID);
+            ArrayList<String> parts = new ArrayList<>();
+
+            for (int i = 0 ; i < partsID.size() ; i++){
+                parts.add(databaseConnection.getRows1Variable("Parte", "ParteID", partsID.get(i)).get(1));
+            }
+
+            return parts.toString();
+        }
+        
+        return "El automóvil digitado no existe en la base de datos";
     }
 }

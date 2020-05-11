@@ -36,10 +36,10 @@ public class ConnectionManager {
         this.url = url;
         this.user = user;
         this.password = password;
-        this.errorManager = new ErrorManager(this);
         this.clientManager = new ClientManager(this);
         this.partManager = new PartManager(this);
         this.orderManager = new OrderManager(this);
+        this.errorManager = new ErrorManager(this);
     }
     
     public ArrayList<String> getDatabaseMetaData() throws SQLException
@@ -61,10 +61,9 @@ public class ConnectionManager {
             
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connected to Microsoft SQL Server");
-            errorManager.init();
             
         } catch (SQLException ex) {
-            System.out.println(errorManager.handleError(EnumTag.ConnectionAttempt,null));
+            System.out.println("Error de credenciales");
         }    
     }
     
@@ -75,8 +74,8 @@ public class ConnectionManager {
     public String getTable(String table){
         ArrayList<String> parameters = new ArrayList<String>();
         parameters.add(table);
-        String integrityCheck = errorManager.handleError(EnumTag.GetTable,parameters);
-        if(integrityCheck.equals("")){
+        
+        
         
             try {
 
@@ -111,9 +110,6 @@ public class ConnectionManager {
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else
-            System.err.println(integrityCheck);
 
         return null;
     }
@@ -197,8 +193,8 @@ public class ConnectionManager {
             String queryString = "";
             queryString+="SELECT * FROM "+table+" WHERE "+column1+" = "+value1+";";
 
-            System.out.println("\nQuery string:");
-            System.out.println(queryString);
+           // System.out.println("\nQuery string:");
+           // System.out.println(queryString);
 
             rs=sqlStatement.executeQuery(queryString);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -216,7 +212,7 @@ public class ConnectionManager {
             rs.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
          return row;   
     }
@@ -230,8 +226,8 @@ public class ConnectionManager {
             String queryString = "";
             queryString+="DELETE FROM "+table+ " WHERE "+column+" = "+"'"+row+"'"+ ";";
             
-            System.out.println("\nQuery string:");
-            System.out.println(queryString);
+           // System.out.println("\nQuery string:");
+           // System.out.println(queryString);
             
             sqlStatement.execute(queryString);
             
@@ -265,8 +261,8 @@ public class ConnectionManager {
             
            queryString+=")"; 
             
-            System.out.println("\nQuery string:");
-            System.out.println(queryString);
+            //System.out.println("\nQuery string:");
+            //System.out.println(queryString);
             
             sqlStatement.execute(queryString,Statement.RETURN_GENERATED_KEYS);
             
@@ -295,12 +291,12 @@ public class ConnectionManager {
             String queryString = "";
             queryString+="UPDATE "+table+" SET "+ column + " = "+ newValue + " WHERE "+ referenceColumn + " = "+referenceValue+";";
             
-            System.out.println("\nQuery string:");
-            System.out.println(queryString);
+            //System.out.println("\nQuery string:");
+            //System.out.println(queryString);
             
             sqlStatement.execute(queryString);
             
-            System.out.println(table+ " updated");
+            //System.out.println(table+ " updated");
             
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -318,8 +314,8 @@ public class ConnectionManager {
                     " WHERE "+ referenceColumn + " = "+referenceValue+" AND "+
                     referenceColumn2 + " = "+referenceValue2+";";
             
-            System.out.println("\nQuery string:");
-            System.out.println(queryString);
+            //System.out.println("\nQuery string:");
+            //System.out.println(queryString);
             
             sqlStatement.execute(queryString);
             
@@ -328,5 +324,15 @@ public class ConnectionManager {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String linkOrgName2ID(String orgName){
+        ArrayList<String> org = getRows1Variable("Organización", "Nombre", orgName);
+        return org.get(0);
+    }
+    
+    public String linkPersonName2ID(String personName){
+        ArrayList<String> org = getRows1Variable("Persona", "Nombre", personName);
+        return org.get(0);
     }
 }

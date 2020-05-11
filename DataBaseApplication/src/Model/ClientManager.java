@@ -35,35 +35,46 @@ public class ClientManager {
         return clientID;
     }
     
-    public void insertPerson(ArrayList<String> parameters) throws SQLException{
-        ArrayList<String> telefono = new ArrayList<>();
-        telefono.add(parameters.get(parameters.size()-1));
-        telefono.add(parameters.get(0));
-        parameters.remove(parameters.size()-1);
-        
-        int clientID = insertClient();
-        
-        parameters.add(String.valueOf(clientID));
-        
-        databaseConnection.insertRow(parameters, "Persona");
-        databaseConnection.insertRow(telefono, "TelefonoPersona");
+    public String insertPerson(ArrayList<String> parameters) throws SQLException{
+        if(databaseConnection.errorManager.checkClientIntegrity(parameters.get(0))){
+            ArrayList<String> telefono = new ArrayList<>();
+            telefono.add(parameters.get(parameters.size()-1));
+            telefono.add(parameters.get(0));
+            parameters.remove(parameters.size()-1);
+
+            int clientID = insertClient();
+
+            parameters.add(String.valueOf(clientID));
+
+            databaseConnection.insertRow(parameters, "Persona");
+            databaseConnection.insertRow(telefono, "TelefonoPersona");
+            return "Cliente agregado con éxito";
+        }
+        return "Cliente digitado ya existe en la base de datos, o no cumple con los parametros adecuados";
     }
     
-    public void insertOrganization(ArrayList<String> parameters) throws SQLException{
-        
-        int clientID = insertClient();
-        
-        parameters.add(String.valueOf(clientID));
-        
-        databaseConnection.insertRow(parameters, "Organización");
-        
+    public String insertOrganization(ArrayList<String> parameters) throws SQLException{
+        if(databaseConnection.errorManager.checkClientIntegrity(parameters.get(0)) && databaseConnection.errorManager.checkOrgIntegrity(parameters.get(1)) ){
+            int clientID = insertClient();
+
+            parameters.add(String.valueOf(clientID));
+
+            databaseConnection.insertRow(parameters, "Organización");
+            return "Cliente agregado con éxito";
+        }
+        return "Cliente digitado ya existe en la base de datos, o no cumple con los parametros adecuados";
     }
     
-    public void insertContact(ArrayList<String> parameters){
-        ArrayList<String> organizationInfo = databaseConnection.getRows1Variable("Organización", "Nombre", parameters.get(0));
-        parameters.remove(0);
-        parameters.add(organizationInfo.get(0));
-        databaseConnection.insertRow(parameters, "Contacto");
+    public String insertContact(ArrayList<String> parameters){
+        
+        if(!databaseConnection.errorManager.checkOrgIntegrity(parameters.get(0)) && databaseConnection.errorManager.checkContactIntegrity(parameters.get(0)) ){
+            ArrayList<String> organizationInfo = databaseConnection.getRows1Variable("Organización", "Nombre", parameters.get(0));
+            parameters.remove(0);
+            parameters.add(organizationInfo.get(0));
+            databaseConnection.insertRow(parameters, "Contacto");
+            return "Contacto agregado con éxito a la base de datos";
+        }
+        return "Organización indicada no existe en la base de datos o ya posee un contacto asignado";
     }
     
     public void changeClientState(String clientID,String newState) throws SQLException{
@@ -84,27 +95,39 @@ public class ClientManager {
         
     }
     
-    public void modifyClient(String clientID,ArrayList<String> newInfo){
+    public String modifyClient(String clientID,ArrayList<String> newInfo){
         ArrayList<String> tableInfo;
         if(clientID.length() == 9){
             tableInfo = databaseConnection.getRows1Variable("Persona", "Cedula", clientID);
             
-            for (int i = 0 ; i < newInfo.size() ; i++){
-                databaseConnection.updateRow("Persona", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
+            if(!tableInfo.isEmpty()){
+            
+                for (int i = 0 ; i < newInfo.size() ; i++){
+                    databaseConnection.updateRow("Persona", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
+                }
             }
+            else 
+                return "El cliente ingresado no se encuentra en la base de datos";
         }
         
         else{
             tableInfo = databaseConnection.getRows1Variable("Organización", "Cedula", clientID);
-        
-            for (int i = 0 ; i < newInfo.size() ; i++){
-                databaseConnection.updateRow("Organizacion", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
+            
+            if(!tableInfo.isEmpty()){
+            
+                for (int i = 0 ; i < newInfo.size() ; i++){
+                    databaseConnection.updateRow("Organizacion", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
+                }
             }
-        }  
+            else 
+                return "El cliente ingresado no se encuentra en la base de datos";
+        } 
+        return "Cliente modificado con éxito";
     }
     
     public void listClients() throws SQLException{
         
         databaseConnection.getTable("Cliente");
     }
+
 }
