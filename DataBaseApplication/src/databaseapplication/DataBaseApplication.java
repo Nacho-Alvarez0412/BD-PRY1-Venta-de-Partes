@@ -5,6 +5,7 @@
  */
 package databaseapplication;
 
+import Controller.MainMenuController;
 import Model.ConnectionManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +26,11 @@ public class DataBaseApplication {
         String user = "Nacho1";
         String password = "1234";
         
+        MainMenuController mainMenuController = new MainMenuController(url, user, password);
+        
+        
+        
+       /* 
         try {
             
             //Connect
@@ -93,12 +99,11 @@ public class DataBaseApplication {
             
             
             //Disconnect
-            databaseConnection.disconnect();
+            //databaseConnection.disconnect();
             
             
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        
+        //} catch (SQLException ex) {
+        //    System.out.println(ex);
+       // }
     }
 }
