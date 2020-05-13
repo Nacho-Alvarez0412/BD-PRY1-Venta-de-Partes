@@ -7,6 +7,7 @@ package Controller;
 
 import Model.ConnectionManager;
 import View.PartMenu;
+import View.UpdatePricesMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,12 @@ import java.awt.event.ActionListener;
 public class PartMenuController implements ActionListener {
     private PartMenu view;
     private ConnectionManager dataBaseConnection;
+    private InsertPartController insertPart;
+    private DeletePartController deletePart;
+    private LinkPartWithProviderController linkProvider;
+    private LinkPartWithVehicleController linkVehicle;
+    private UpdatePricesController updatePrices;
+    private ListPartController listParts;
 
     public PartMenuController(ConnectionManager dataBaseConnection) {
         view = new PartMenu();
@@ -41,17 +48,21 @@ public class PartMenuController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
             System.out.println("Accediendo a ventana de Insertar Partes");
+            insertPart = new InsertPartController(dataBaseConnection);
         }
         
         else if (e.getSource().equals(view.DeleteButton)){
             System.out.println("Accediendo a ventana de Borrar Partes");
+            deletePart = new DeletePartController(dataBaseConnection);
         }
         
         else if (e.getSource().equals(view.ListPartButton)){
             System.out.println("Accediendo a ventana de Listar Partes");
+            listParts = new ListPartController(dataBaseConnection);
         }
         else if (e.getSource().equals(view.PreciosButton)){
             System.out.println("Accediendo a ventana de Actualizar Precios");
+            updatePrices = new UpdatePricesController(dataBaseConnection);
         } 
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
@@ -59,9 +70,11 @@ public class PartMenuController implements ActionListener {
         }
         else if (e.getSource().equals(view.ProviderButton)){
              System.out.println("Accediendo a ventana de Asociar Proveedores con Partes"); 
+             linkProvider = new LinkPartWithProviderController(dataBaseConnection);
         }
         else if (e.getSource().equals(view.VehicleButton)){
              System.out.println("Accediendo a ventana de Asociar Autos con Partes");
+             linkVehicle = new LinkPartWithVehicleController(dataBaseConnection);
         }
         
     }

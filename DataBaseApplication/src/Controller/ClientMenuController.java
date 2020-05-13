@@ -9,6 +9,9 @@ import Model.ConnectionManager;
 import View.ClientMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +21,7 @@ public class ClientMenuController implements ActionListener {
     private ClientMenu view;
     private ConnectionManager dataBaseConnection;
     private InsertClientController insertView;
+    private SuspendClientController suspendClient;
 
     public ClientMenuController(ConnectionManager dataBaseConnection) {
         view = new ClientMenu();
@@ -45,6 +49,11 @@ public class ClientMenuController implements ActionListener {
         
         else if (e.getSource().equals(view.ListButton)){
             System.out.println("Accediendo a ventana de Listar Clientes");
+            try {
+                dataBaseConnection.clientManager.listClients();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClientMenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         else if (e.getSource().equals(view.ModifyButton)){
@@ -52,6 +61,7 @@ public class ClientMenuController implements ActionListener {
         }
         else if (e.getSource().equals(view.SuspendButton)){
             System.out.println("Accediendo a ventana de Suspender Clientes");
+            suspendClient = new SuspendClientController(dataBaseConnection);
         } 
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");

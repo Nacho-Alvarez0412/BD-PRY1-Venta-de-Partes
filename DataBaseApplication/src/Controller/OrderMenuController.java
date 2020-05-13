@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 public class OrderMenuController implements ActionListener {
     private OrderMenu view;
     private ConnectionManager dataBaseConnection;
+    private PartsByProviderController partsByProvider;
+    private InsertOrderController insertOrder;
+    private AddBuyToOrderController addBuy;
 
     public OrderMenuController(ConnectionManager dataBaseConnection) {
         view = new OrderMenu();
@@ -38,14 +41,17 @@ public class OrderMenuController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
             System.out.println("Accediendo a ventana de Insertar Ordenes");
+             insertOrder = new InsertOrderController(dataBaseConnection);
         }
         
         else if (e.getSource().equals(view.BuyPartsButton)){
             System.out.println("Accediendo a ventana de Comprar Partes");
+            addBuy = new AddBuyToOrderController(dataBaseConnection);
         }
         
         else if (e.getSource().equals(view.ProviderButton)){
             System.out.println("Accediendo a ventana de Listar Proveedores");
+            partsByProvider = new PartsByProviderController(dataBaseConnection);
         }
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
