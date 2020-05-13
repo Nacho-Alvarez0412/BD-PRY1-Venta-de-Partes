@@ -18,14 +18,16 @@ import java.util.logging.Logger;
  * @author nacho
  */
 public class ClientMenuController implements ActionListener {
-    private ClientMenu view;
+    public ClientMenu view;
+    private MainMenuController previousView;
     private ConnectionManager dataBaseConnection;
     private InsertClientController insertView;
     private SuspendClientController suspendClient;
 
-    public ClientMenuController(ConnectionManager dataBaseConnection) {
+    public ClientMenuController(ConnectionManager dataBaseConnection,MainMenuController previousView) {
         view = new ClientMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView; 
         init();
     }
 
@@ -44,7 +46,7 @@ public class ClientMenuController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
             System.out.println("Accediendo a ventana de Insertar Clientes");
-            insertView = new InsertClientController(dataBaseConnection);
+            insertView = new InsertClientController(dataBaseConnection,this);
         }
         
         else if (e.getSource().equals(view.ListButton)){
@@ -65,7 +67,8 @@ public class ClientMenuController implements ActionListener {
         } 
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false); 
+            previousView.view.setVisible(true);
         }
         
     }

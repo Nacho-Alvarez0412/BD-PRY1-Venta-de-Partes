@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class MainMenuController implements ActionListener {
     private ConnectionManager dataBaseConnection;
-    private MainMenu view;
+    public MainMenu view;
     public ClientMenuController clientMenu;
     public PartMenuController partMenu;
     public OrderMenuController orderMenu;
@@ -62,7 +62,8 @@ public class MainMenuController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.ClientesButton)){
             System.out.println("Accediendo a ventana de Clientes");
-            clientMenu = new ClientMenuController(dataBaseConnection);
+            clientMenu = new ClientMenuController(dataBaseConnection,this);
+            view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.OrdenButton)){

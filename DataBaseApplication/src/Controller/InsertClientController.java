@@ -22,10 +22,12 @@ import java.util.logging.Logger;
 public class InsertClientController implements ActionListener {
     private InsertClientMenu view;
     private ConnectionManager dataBaseConnection;
+    private ClientMenuController previousView;
 
-    public InsertClientController(ConnectionManager dataBaseConnection) {
+    public InsertClientController(ConnectionManager dataBaseConnection,ClientMenuController previousView) {
         view = new InsertClientMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView;
         init();
     }
 
@@ -79,7 +81,8 @@ public class InsertClientController implements ActionListener {
         
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false);
+            previousView.view.setVisible(true);
         }
         
     }

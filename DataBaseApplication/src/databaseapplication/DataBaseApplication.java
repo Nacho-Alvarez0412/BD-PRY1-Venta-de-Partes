@@ -22,9 +22,9 @@ public class DataBaseApplication {
     public static void main(String[] args) {
         
         
-        String url = "jdbc:sqlserver://localhost:1433;databasename=VentaAutos";
-        String user = "SA";
-        String password = "<B4b0rsh162715>";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=Venta de Partes";
+        String user = "Nacho1";
+        String password = "1234";
         
         MainMenuController mainMenuController = new MainMenuController(url, user, password);
         
