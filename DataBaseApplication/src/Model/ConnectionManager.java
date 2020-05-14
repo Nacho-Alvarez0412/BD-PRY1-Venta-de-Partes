@@ -71,9 +71,8 @@ public class ConnectionManager {
         connection.close();
     }
     
-    public String getTable(String table){
-        ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add(table);
+    public ArrayList<ArrayList<String>> getTable(String table){
+        ArrayList<ArrayList<String>> tableInfo = new ArrayList<>();
         
         
         
@@ -95,17 +94,19 @@ public class ConnectionManager {
                 int columnsNumber = rsmd.getColumnCount();       
 
                 while (rs.next()) {
-
+                    ArrayList<String> data = new ArrayList<String>();
                     for(int i = 1 ; i <= columnsNumber; i++){
 
                         System.out.print(rs.getString(i) + " ");
+                        data.add(rs.getString(i));
                     }
                     System.out.println();
+                    tableInfo.add(data);
                 }
 
                 rs.close();
 
-                return table;
+                return tableInfo;
 
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);

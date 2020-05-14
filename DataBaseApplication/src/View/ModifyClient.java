@@ -9,12 +9,12 @@ package View;
  *
  * @author nacho
  */
-public class SuspendClientMenu extends javax.swing.JFrame {
+public class ModifyClient extends javax.swing.JFrame {
 
     /**
      * Creates new form MainMenu
      */
-    public SuspendClientMenu() {
+    public ModifyClient() {
         initComponents();
         this.setSize(995, 650);
         
@@ -33,16 +33,19 @@ public class SuspendClientMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         BackgroundLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        UpdateButton = new javax.swing.JButton();
+        ModifyButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
-        StateType = new javax.swing.JComboBox<>();
         CedulaText = new javax.swing.JTextField();
-        ClientType1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        NombreText = new javax.swing.JTextField();
+        DireccionText = new javax.swing.JTextField();
+        CiudadText = new javax.swing.JTextField();
+        NumeroText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,23 +62,23 @@ public class SuspendClientMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 210, 160, 180);
+        jLabel3.setBounds(40, 170, 160, 180);
 
-        UpdateButton.setBackground(new java.awt.Color(213, 213, 213));
+        ModifyButton.setBackground(new java.awt.Color(213, 213, 213));
 
-        UpdateButton.setForeground(new java.awt.Color(4, 83, 125));
-        UpdateButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
-        UpdateButton.setForeground(new java.awt.Color(4, 83, 125));
-        UpdateButton.setText("Actualizar");
-        UpdateButton.setToolTipText("");
-        UpdateButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+        ModifyButton.setForeground(new java.awt.Color(4, 83, 125));
+        ModifyButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        ModifyButton.setForeground(new java.awt.Color(4, 83, 125));
+        ModifyButton.setText("Actualizar");
+        ModifyButton.setToolTipText("");
+        ModifyButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ModifyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateButtonActionPerformed(evt);
+                ModifyButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(UpdateButton);
-        UpdateButton.setBounds(440, 500, 190, 50);
+        getContentPane().add(ModifyButton);
+        ModifyButton.setBounds(450, 540, 180, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
@@ -90,72 +93,82 @@ public class SuspendClientMenu extends javax.swing.JFrame {
         getContentPane().add(ExitButton);
         ExitButton.setBounds(10, 550, 170, 50);
 
-        StateType.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        StateType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Suspendido", "Inactivo" }));
-        StateType.setToolTipText("");
-        StateType.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                StateTypeItemStateChanged(evt);
-            }
-        });
-        StateType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StateTypeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(StateType);
-        StateType.setBounds(460, 430, 150, 30);
-
-        CedulaText.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        CedulaText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         CedulaText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(CedulaText);
-        CedulaText.setBounds(550, 350, 140, 30);
-
-        ClientType1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        ClientType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona", "Organización" }));
-        ClientType1.setToolTipText("");
-        ClientType1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ClientType1ItemStateChanged(evt);
-            }
-        });
-        ClientType1.addActionListener(new java.awt.event.ActionListener() {
+        CedulaText.setText("*Necesaria para actualizar*");
+        CedulaText.setToolTipText("");
+        CedulaText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClientType1ActionPerformed(evt);
+                CedulaTextActionPerformed(evt);
             }
         });
-        getContentPane().add(ClientType1);
-        ClientType1.setBounds(370, 350, 150, 30);
+        getContentPane().add(CedulaText);
+        CedulaText.setBounds(340, 320, 200, 30);
 
-        jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel2.setText("Nuevo Estado");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(480, 390, 110, 40);
+        NombreText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NombreText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NombreText.setToolTipText("");
+        getContentPane().add(NombreText);
+        NombreText.setBounds(550, 320, 200, 30);
+
+        DireccionText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        DireccionText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        DireccionText.setToolTipText("");
+        getContentPane().add(DireccionText);
+        DireccionText.setBounds(550, 400, 200, 30);
+
+        CiudadText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        CiudadText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        CiudadText.setToolTipText("");
+        getContentPane().add(CiudadText);
+        CiudadText.setBounds(340, 400, 200, 30);
+
+        NumeroText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NumeroText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NumeroText.setText("*Solo aplica para persona*");
+        NumeroText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NumeroTextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(NumeroText);
+        NumeroText.setBounds(440, 470, 200, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel4.setText("Cambiar Estado");
+        jLabel4.setText("Modificar Cliente");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 380, 230, 60);
-
-        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel5.setText("Cliente");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(90, 420, 100, 60);
+        jLabel4.setBounds(10, 350, 250, 70);
 
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel6.setText("Tipo Cliente");
+        jLabel6.setText("Ciudad");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(400, 310, 90, 40);
+        jLabel6.setBounds(410, 360, 60, 40);
 
         jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(4, 83, 125));
         jLabel7.setText("Cédula");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(590, 310, 50, 40);
+        jLabel7.setBounds(410, 280, 50, 40);
+
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel8.setText("Nombre");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(620, 280, 60, 40);
+
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel9.setText("Dirección");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(620, 360, 70, 40);
+
+        jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel10.setText("Teléfono");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(510, 430, 70, 40);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -169,26 +182,17 @@ public class SuspendClientMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ExitButtonActionPerformed
 
-    private void StateTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StateTypeActionPerformed
+    private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_StateTypeActionPerformed
+    }//GEN-LAST:event_ModifyButtonActionPerformed
 
-    private void StateTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StateTypeItemStateChanged
+    private void CedulaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaTextActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_StateTypeItemStateChanged
+    }//GEN-LAST:event_CedulaTextActionPerformed
 
-    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+    private void NumeroTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UpdateButtonActionPerformed
-
-    private void ClientType1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ClientType1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ClientType1ItemStateChanged
-
-    private void ClientType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientType1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ClientType1ActionPerformed
+    }//GEN-LAST:event_NumeroTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,13 +211,13 @@ public class SuspendClientMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SuspendClientMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SuspendClientMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SuspendClientMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SuspendClientMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -227,7 +231,7 @@ public class SuspendClientMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SuspendClientMenu().setVisible(true);
+                new ModifyClient().setVisible(true);
             }
         });
     }
@@ -236,16 +240,19 @@ public class SuspendClientMenu extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel BackgroundLabel1;
     public javax.swing.JTextField CedulaText;
-    public javax.swing.JComboBox<String> ClientType1;
+    public javax.swing.JTextField CiudadText;
+    public javax.swing.JTextField DireccionText;
     public javax.swing.JButton ExitButton;
-    public javax.swing.JComboBox<String> StateType;
-    public javax.swing.JButton UpdateButton;
+    public javax.swing.JButton ModifyButton;
+    public javax.swing.JTextField NombreText;
+    public javax.swing.JTextField NumeroText;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

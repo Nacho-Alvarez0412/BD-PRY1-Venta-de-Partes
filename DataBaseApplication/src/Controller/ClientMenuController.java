@@ -10,6 +10,7 @@ import View.ClientMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,28 +46,28 @@ public class ClientMenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
-            System.out.println("Accediendo a ventana de Insertar Clientes");
             insertView = new InsertClientController(dataBaseConnection,this);
+            view.setVisible(false); 
         }
         
         else if (e.getSource().equals(view.ListButton)){
-            System.out.println("Accediendo a ventana de Listar Clientes");
-            try {
-                dataBaseConnection.clientManager.listClients();
-            } catch (SQLException ex) {
-                Logger.getLogger(ClientMenuController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ArrayList<ArrayList<String>> personas = dataBaseConnection.getTable("Persona");
+            ArrayList<ArrayList<String>> organizaciones = dataBaseConnection.getTable("Organización");
+            String personasString = dataBaseConnection.clientManager.PersonToString(personas);
+            String organizacionesString = dataBaseConnection.clientManager.OrganizationToString(organizaciones);
+            ListClientsController listClient = new ListClientsController(view, personasString, organizacionesString);
+            view.setVisible(false); 
         }
         
         else if (e.getSource().equals(view.ModifyButton)){
-            System.out.println("Accediendo a ventana de Modificar Clientes");
+            ModifyClientController moddifyClient = new ModifyClientController(dataBaseConnection, this);
+            this.view.setVisible(false);
         }
         else if (e.getSource().equals(view.SuspendButton)){
-            System.out.println("Accediendo a ventana de Suspender Clientes");
-            suspendClient = new SuspendClientController(dataBaseConnection);
+            suspendClient = new SuspendClientController(dataBaseConnection,this);
+            view.setVisible(false); 
         } 
         else if (e.getSource().equals(view.ExitButton)){
-            System.out.println("Exiting");
             view.setVisible(false); 
             previousView.view.setVisible(true);
         }

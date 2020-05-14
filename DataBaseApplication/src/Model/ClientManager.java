@@ -35,7 +35,7 @@ public class ClientManager {
         return clientID;
     }
     
-    public String insertPerson(ArrayList<String> parameters) throws SQLException{
+    public boolean insertPerson(ArrayList<String> parameters) throws SQLException{
         if(databaseConnection.errorManager.checkClientIntegrity(parameters.get(0))){
             ArrayList<String> telefono = new ArrayList<>();
             telefono.add(parameters.get(parameters.size()-1));
@@ -48,21 +48,21 @@ public class ClientManager {
 
             databaseConnection.insertRow(parameters, "Persona");
             databaseConnection.insertRow(telefono, "TelefonoPersona");
-            return "Cliente agregado con éxito";
+            return true;
         }
-        return "Cliente digitado ya existe en la base de datos, o no cumple con los parametros adecuados";
+        return false;
     }
     
-    public String insertOrganization(ArrayList<String> parameters) throws SQLException{
+    public boolean insertOrganization(ArrayList<String> parameters) throws SQLException{
         if(databaseConnection.errorManager.checkClientIntegrity(parameters.get(0)) && databaseConnection.errorManager.checkOrgIntegrity(parameters.get(1)) ){
             int clientID = insertClient();
 
             parameters.add(String.valueOf(clientID));
 
             databaseConnection.insertRow(parameters, "Organización");
-            return "Cliente agregado con éxito";
+            return true;
         }
-        return "Cliente digitado ya existe en la base de datos, o no cumple con los parametros adecuados";
+        return false;
     }
     
     public String insertContact(ArrayList<String> parameters){
@@ -77,7 +77,7 @@ public class ClientManager {
         return "Organización indicada no existe en la base de datos o ya posee un contacto asignado";
     }
     
-    public void changeClientState(String clientID,String newState) throws SQLException{
+    public boolean changeClientState(String clientID,String newState) throws SQLException{
         
         newState = "'"+newState+"'";
         ArrayList<String> rowInfo;
@@ -88,14 +88,16 @@ public class ClientManager {
         else{
             rowInfo = databaseConnection.getRows1Variable("Organización", "Cedula", clientID);
         }
-        
-        databaseConnection.updateRow("Cliente", "Estado", "ClienteID", rowInfo.get(4), newState);
-        
-        System.out.println("Client state Change");
-        
+        if(rowInfo.isEmpty())
+            return false;
+        else{
+            databaseConnection.updateRow("Cliente", "Estado", "ClienteID", rowInfo.get(4), newState);
+            return true;
+        }
+                
     }
     
-    public String modifyClient(String clientID,ArrayList<String> newInfo){
+    public boolean modifyClient(String clientID,ArrayList<String> newInfo){
         ArrayList<String> tableInfo;
         if(clientID.length() == 9){
             tableInfo = databaseConnection.getRows1Variable("Persona", "Cedula", clientID);
@@ -107,7 +109,7 @@ public class ClientManager {
                 }
             }
             else 
-                return "El cliente ingresado no se encuentra en la base de datos";
+                return false;
         }
         
         else{
@@ -116,18 +118,63 @@ public class ClientManager {
             if(!tableInfo.isEmpty()){
             
                 for (int i = 0 ; i < newInfo.size() ; i++){
-                    databaseConnection.updateRow("Organizacion", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
+                    databaseConnection.updateRow("Organización", newInfo.get(i), "Cedula", tableInfo.get(0), newInfo.get(++i));
                 }
             }
             else 
-                return "El cliente ingresado no se encuentra en la base de datos";
+                return false;
         } 
-        return "Cliente modificado con éxito";
+        return true;
     }
     
-    public void listClients() throws SQLException{
+    public String getPersonNumber(String cedula){
         
-        databaseConnection.getTable("Cliente");
+        String phone = databaseConnection.getRows1Variable("TelefonoPersona", "Cliente", cedula).get(0);
+        return phone;
+    }
+    
+    public String PersonToString(ArrayList<ArrayList<String>> data){
+        String result = "";
+        
+        for(int i = 0 ; i < data.size() ; i++){
+            for(int j = 0 ; j < data.get(i).size()-1 ; j++){
+                result += data.get(i).get(j);
+                
+                if(j == 0)
+                    result += "\t";
+                else
+                    result += "\t\t";
+            }
+            result+= getPersonNumber(data.get(i).get(0)) + "\n";
+        }
+        
+        
+        return result;
+    }
+
+    public String OrganizationToString(ArrayList<ArrayList<String>> data) {
+        String result = "";
+        
+        for(int i = 0 ; i < data.size() ; i++){
+            for(int j = 0 ; j < data.get(i).size()-1 ; j++){
+                result += data.get(i).get(j);
+                
+                if(j == 0)
+                    result += "\t";
+                else
+                    result += "\t\t";
+            }
+            result+= getOrgNumber(data.get(i).get(0)) + "\n";
+        }
+        return result;
+    }
+
+    private String getOrgNumber(String cedula) {
+        ArrayList<String> data = databaseConnection.getRows1Variable("Contacto", "Organizacion", cedula);
+        String contact = "";
+        if(!data.isEmpty())
+            contact = data.get(0)+","+data.get(2)+","+data.get(1);
+        return contact;
     }
 
 }

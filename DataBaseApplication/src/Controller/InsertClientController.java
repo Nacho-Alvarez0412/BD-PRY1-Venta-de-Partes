@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,8 +44,16 @@ public class InsertClientController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
-            System.out.println("Inserting Client");
             int type = view.ClientType.getSelectedIndex();
+            
+            
+            try{
+                Integer.valueOf(view.CedulaText.getText());
+            }
+            catch(java.lang.NumberFormatException ex){
+                JOptionPane.showMessageDialog(view,"Los valores en el campo 'Cédula' y 'Teléfono' deben ser valores numéricos");
+                return;
+            }
              
             if(type == 0){
                 ArrayList<String> persona = new ArrayList<>();
@@ -54,9 +63,20 @@ public class InsertClientController implements ActionListener {
                 persona.add("'"+view.CiudadText.getText()+"'");
                 persona.add(view.NumeroText.getText());
                 
+                try{
+                Integer.valueOf(view.NumeroText.getText());
+            }
+            catch(java.lang.NumberFormatException ex){
+                JOptionPane.showMessageDialog(view,"Los valores en el campo 'Cédula' y 'Teléfono' deben ser valores numéricos");
+                return;
+            }
+                
                 try {
                     
-                    System.out.println(this.dataBaseConnection.clientManager.insertPerson(persona));
+                    if(dataBaseConnection.clientManager.insertPerson(persona))
+                        JOptionPane.showMessageDialog(view,"Persona agregada con exito");
+                    else
+                        JOptionPane.showMessageDialog(view,"La persona indicada ya se encuentra en la base de datos");
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(InsertClientController.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,12 +91,16 @@ public class InsertClientController implements ActionListener {
                 
                 try {
                     
-                    System.out.println(this.dataBaseConnection.clientManager.insertOrganization(organizacion));
+                    if(dataBaseConnection.clientManager.insertOrganization(organizacion))
+                        JOptionPane.showMessageDialog(view,"Organización agregada con exito");
+                    else
+                        JOptionPane.showMessageDialog(view,"La organización indicada ya se encuentra en la base de datos");
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(InsertClientController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+           
         }
         
         else if (e.getSource().equals(view.ExitButton)){

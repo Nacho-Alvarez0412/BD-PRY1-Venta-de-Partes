@@ -16,7 +16,7 @@ public class InsertClientMenu extends javax.swing.JFrame {
      */
     public InsertClientMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -41,6 +41,13 @@ public class InsertClientMenu extends javax.swing.JFrame {
         DireccionText = new javax.swing.JTextField();
         CiudadText = new javax.swing.JTextField();
         NumeroText = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,14 +64,14 @@ public class InsertClientMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(40, 170, 160, 180);
 
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
 
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setText("Insert");
+        InsertButton.setText("Insertar");
         InsertButton.setToolTipText("");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -73,12 +80,12 @@ public class InsertClientMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(580, 490, 170, 50);
+        InsertButton.setBounds(540, 530, 170, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,8 +93,9 @@ public class InsertClientMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(10, 550, 170, 50);
 
+        ClientType.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         ClientType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona", "Organización" }));
         ClientType.setToolTipText("");
         ClientType.addItemListener(new java.awt.event.ItemListener() {
@@ -101,27 +109,89 @@ public class InsertClientMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ClientType);
-        ClientType.setBounds(290, 270, 120, 26);
+        ClientType.setBounds(260, 380, 140, 30);
 
-        CedulaText.setText("Cedula");
+        CedulaText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        CedulaText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        CedulaText.setToolTipText("");
+        CedulaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CedulaTextActionPerformed(evt);
+            }
+        });
         getContentPane().add(CedulaText);
-        CedulaText.setBounds(500, 270, 85, 24);
+        CedulaText.setBounds(420, 300, 200, 30);
 
-        NombreText.setText("Nombre");
+        NombreText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NombreText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NombreText.setToolTipText("");
         getContentPane().add(NombreText);
-        NombreText.setBounds(660, 270, 110, 24);
+        NombreText.setBounds(630, 300, 200, 30);
 
-        DireccionText.setText("Dirección");
+        DireccionText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        DireccionText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        DireccionText.setToolTipText("");
         getContentPane().add(DireccionText);
-        DireccionText.setBounds(370, 350, 160, 24);
+        DireccionText.setBounds(630, 380, 200, 30);
 
-        CiudadText.setText("Ciudad");
+        CiudadText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        CiudadText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        CiudadText.setToolTipText("");
         getContentPane().add(CiudadText);
-        CiudadText.setBounds(580, 350, 130, 24);
+        CiudadText.setBounds(420, 380, 200, 30);
 
-        NumeroText.setText("Número");
+        NumeroText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NumeroText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NumeroText.setText("*Solo aplica para persona*");
+        NumeroText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NumeroTextActionPerformed(evt);
+            }
+        });
         getContentPane().add(NumeroText);
-        NumeroText.setBounds(510, 430, 100, 24);
+        NumeroText.setBounds(520, 450, 200, 30);
+
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel4.setText("Insertar Cliente");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 350, 220, 70);
+
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel5.setText("Tipo de Cliente");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(280, 340, 110, 40);
+
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel6.setText("Ciudad");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(490, 340, 60, 40);
+
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel7.setText("Cédula");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(490, 260, 50, 40);
+
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel8.setText("Nombre");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(700, 260, 60, 40);
+
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel9.setText("Dirección");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(700, 340, 70, 40);
+
+        jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel10.setText("Teléfono");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(590, 410, 70, 40);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -152,6 +222,14 @@ public class InsertClientMenu extends javax.swing.JFrame {
             this.NumeroText.setEnabled(false);
         }
     }//GEN-LAST:event_ClientTypeItemStateChanged
+
+    private void CedulaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CedulaTextActionPerformed
+
+    private void NumeroTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NumeroTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +281,13 @@ public class InsertClientMenu extends javax.swing.JFrame {
     public javax.swing.JTextField NombreText;
     public javax.swing.JTextField NumeroText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
