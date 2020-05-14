@@ -125,7 +125,6 @@ public class ModifyClient extends javax.swing.JFrame {
 
         NumeroText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         NumeroText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        NumeroText.setText("*Solo aplica para persona*");
         NumeroText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NumeroTextActionPerformed(evt);

@@ -35,6 +35,7 @@ public class InsertClientController implements ActionListener {
     private void init() {
         
         view.InsertButton.addActionListener(this);
+        view.InsertContactButton.addActionListener(this);
         view.ExitButton.addActionListener(this);
         view.setTitle("Menu de Clientes");
         view.setVisible(true);
@@ -89,20 +90,50 @@ public class InsertClientController implements ActionListener {
                 organizacion.add("'"+view.DireccionText.getText()+"'");
                 organizacion.add("'"+view.CiudadText.getText()+"'");
                 
+               
+                
                 try {
-                    
-                    if(dataBaseConnection.clientManager.insertOrganization(organizacion))
+
+                    if(dataBaseConnection.clientManager.insertOrganization(organizacion)){
                         JOptionPane.showMessageDialog(view,"Organización agregada con exito");
+                    }
                     else
                         JOptionPane.showMessageDialog(view,"La organización indicada ya se encuentra en la base de datos");
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(InsertClientController.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
+                catch (SQLException ex) {
+                    Logger.getLogger(InsertClientController.class.getName()).log(Level.SEVERE, null, ex);
+                } 
             }
            
         }
         
+        else if (e.getSource().equals(view.InsertContactButton)){
+            String nombreContacto = view.NombreContacto.getText();
+            String cargoContacto = view.PuestoContacto.getText();
+            String telefonoContacto = view.NumeroText.getText();
+            String nombreOrg = view.NombreText.getText();
+                
+                
+                    ArrayList<String> contact = new ArrayList<>();
+                    contact.add("'"+nombreOrg+"'");
+                    contact.add("'"+nombreContacto+"'");
+                    contact.add("'"+telefonoContacto+"'");
+                    contact.add("'"+cargoContacto+"'");
+                    
+                    if(nombreContacto.length() == 0 || cargoContacto.length() == 0 || telefonoContacto.length() == 0 || nombreOrg.length() == 0 ){
+                        JOptionPane.showMessageDialog(view,"Llene todos los espacios para continuar");
+                        return;
+                    }
+                    
+                    else{
+                        if(dataBaseConnection.clientManager.insertContact(contact))
+                            JOptionPane.showMessageDialog(view,"Contacto agregado con éxito");
+                        else
+                            JOptionPane.showMessageDialog(view,"Organización ingresada no existe en la base de datos");
+                    }   
+            
+        }
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
             view.setVisible(false);

@@ -17,6 +17,8 @@ public class InsertClientMenu extends javax.swing.JFrame {
     public InsertClientMenu() {
         initComponents();
         this.setSize(995, 650);
+        this.PuestoContacto.setEnabled(false);
+        this.NombreContacto.setEnabled(false);
         
     }
     
@@ -48,6 +50,11 @@ public class InsertClientMenu extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        NombreContacto = new javax.swing.JTextField();
+        PuestoContacto = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        InsertContactButton = new javax.swing.JButton();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,9 +76,9 @@ public class InsertClientMenu extends javax.swing.JFrame {
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
 
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setText("Insertar");
+        InsertButton.setText("Insertar Cliente");
         InsertButton.setToolTipText("");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +87,7 @@ public class InsertClientMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(540, 530, 170, 50);
+        InsertButton.setBounds(350, 530, 210, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
@@ -142,14 +149,13 @@ public class InsertClientMenu extends javax.swing.JFrame {
 
         NumeroText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         NumeroText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        NumeroText.setText("*Solo aplica para persona*");
         NumeroText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NumeroTextActionPerformed(evt);
             }
         });
         getContentPane().add(NumeroText);
-        NumeroText.setBounds(520, 450, 200, 30);
+        NumeroText.setBounds(310, 480, 200, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(4, 83, 125));
@@ -189,9 +195,69 @@ public class InsertClientMenu extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel10.setText("Teléfono");
+        jLabel10.setText("Nombre Contacto");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(590, 410, 70, 40);
+        jLabel10.setBounds(570, 440, 140, 40);
+
+        NombreContacto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NombreContacto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NombreContacto.setText("*Solo aplica para organización*");
+        NombreContacto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NombreContactoMouseClicked(evt);
+            }
+        });
+        NombreContacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreContactoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(NombreContacto);
+        NombreContacto.setBounds(520, 480, 220, 30);
+
+        PuestoContacto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        PuestoContacto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PuestoContacto.setText("*Solo aplica para organización*");
+        PuestoContacto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PuestoContactoMouseClicked(evt);
+            }
+        });
+        PuestoContacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PuestoContactoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(PuestoContacto);
+        PuestoContacto.setBounds(750, 480, 210, 30);
+
+        jLabel11.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel11.setText("Teléfono");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(390, 440, 70, 40);
+
+        jLabel12.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel12.setText("Cargo Contacto");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(800, 440, 120, 40);
+
+        InsertButton.setBackground(new java.awt.Color(213, 213, 213));
+
+        InsertButton.setForeground(new java.awt.Color(4, 83, 125));
+        InsertContactButton.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        InsertContactButton.setForeground(new java.awt.Color(4, 83, 125));
+        InsertContactButton.setText("Insertar Contacto");
+        InsertContactButton.setToolTipText("");
+        InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        InsertContactButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertContactButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(InsertContactButton);
+        InsertContactButton.setBounds(690, 530, 210, 50);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -216,10 +282,12 @@ public class InsertClientMenu extends javax.swing.JFrame {
     private void ClientTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ClientTypeItemStateChanged
         // TODO add your handling code here:
         if(this.ClientType.getSelectedIndex() == 0){
-            this.NumeroText.setEnabled(true);
+            this.PuestoContacto.setEnabled(false);
+            this.NombreContacto.setEnabled(false);
         }
         else{
-            this.NumeroText.setEnabled(false);
+            this.PuestoContacto.setEnabled(true);
+            this.NombreContacto.setEnabled(true);
         }
     }//GEN-LAST:event_ClientTypeItemStateChanged
 
@@ -230,6 +298,26 @@ public class InsertClientMenu extends javax.swing.JFrame {
     private void NumeroTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NumeroTextActionPerformed
+
+    private void NombreContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreContactoActionPerformed
+        
+    }//GEN-LAST:event_NombreContactoActionPerformed
+
+    private void PuestoContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PuestoContactoActionPerformed
+        
+    }//GEN-LAST:event_PuestoContactoActionPerformed
+
+    private void NombreContactoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreContactoMouseClicked
+        NombreContacto.setText("");
+    }//GEN-LAST:event_NombreContactoMouseClicked
+
+    private void PuestoContactoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PuestoContactoMouseClicked
+        PuestoContacto.setText("");
+    }//GEN-LAST:event_PuestoContactoMouseClicked
+
+    private void InsertContactButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertContactButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InsertContactButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,10 +366,15 @@ public class InsertClientMenu extends javax.swing.JFrame {
     public javax.swing.JTextField DireccionText;
     public javax.swing.JButton ExitButton;
     public javax.swing.JButton InsertButton;
+    public javax.swing.JButton InsertContactButton;
+    public javax.swing.JTextField NombreContacto;
     public javax.swing.JTextField NombreText;
     public javax.swing.JTextField NumeroText;
+    public javax.swing.JTextField PuestoContacto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

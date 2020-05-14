@@ -65,16 +65,16 @@ public class ClientManager {
         return false;
     }
     
-    public String insertContact(ArrayList<String> parameters){
+    public boolean insertContact(ArrayList<String> parameters){
         
         if(!databaseConnection.errorManager.checkOrgIntegrity(parameters.get(0)) && databaseConnection.errorManager.checkContactIntegrity(parameters.get(0)) ){
             ArrayList<String> organizationInfo = databaseConnection.getRows1Variable("Organización", "Nombre", parameters.get(0));
             parameters.remove(0);
             parameters.add(organizationInfo.get(0));
             databaseConnection.insertRow(parameters, "Contacto");
-            return "Contacto agregado con éxito a la base de datos";
+            return true;
         }
-        return "Organización indicada no existe en la base de datos o ya posee un contacto asignado";
+        return false;
     }
     
     public boolean changeClientState(String clientID,String newState) throws SQLException{
@@ -114,6 +114,7 @@ public class ClientManager {
         
         else{
             tableInfo = databaseConnection.getRows1Variable("Organización", "Cedula", clientID);
+            System.out.println(tableInfo);
             
             if(!tableInfo.isEmpty()){
             

@@ -52,6 +52,7 @@ public class ModifyClientController implements ActionListener{
             String ciudad = view.CiudadText.getText();
             String direccion = view.DireccionText.getText();
             String telefono = view.NumeroText.getText();
+            String cedula = view.CedulaText.getText();
             
             ArrayList<String> parameters = new ArrayList<String>();
             
@@ -70,7 +71,14 @@ public class ModifyClientController implements ActionListener{
                 parameters.add("'"+direccion+"'");
             }
             
-            if(dataBaseConnection.clientManager.modifyClient(view.CedulaText.getText(), parameters)){
+            if(telefono.length() != 0){
+                if(cedula.length() == 9)
+                    dataBaseConnection.updateRow("TelefonoPersona", "Telefono", "Cliente", cedula, telefono);
+                else
+                    dataBaseConnection.updateRow("Contacto", "Telefono", "Organizacion", cedula, telefono);
+            }
+            
+            if(dataBaseConnection.clientManager.modifyClient(cedula, parameters)){
                 JOptionPane.showMessageDialog(view,"El cliente fue actualizado con éxito");
                 return;
             }
