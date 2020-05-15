@@ -120,7 +120,7 @@ public class ErrorManager {
     }
     
     boolean isOrder(String clientID,String orderDate){
-        ArrayList<String> order = dataBase.getRows2Variables("Orden", "ClienteID", clientID, "Fecha", orderDate);
+        ArrayList<String> order = dataBase.getRows2Variables("Orden", "ClienteID", clientID, "OrdenID", orderDate);
         
         return order.isEmpty();
     }

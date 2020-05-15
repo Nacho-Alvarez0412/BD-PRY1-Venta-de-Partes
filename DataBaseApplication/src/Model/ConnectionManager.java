@@ -116,8 +116,8 @@ public class ConnectionManager {
     }
     
     
-    public String getColumnFromTable(String table, String column){
-        
+    public ArrayList<String> getColumnFromTable(String table, String column){
+        ArrayList<String> partes = new ArrayList<>();
         try {
             Statement sqlStatement = connection.createStatement();
 
@@ -135,10 +135,11 @@ public class ConnectionManager {
             while (rs.next()) {
 
                 System.out.println(rs.getString(column));
+                partes.add(rs.getString(column));
             }
 
             rs.close();
-            return table;
+            return partes;
         
         }  
         catch (SQLException ex) {
@@ -279,7 +280,7 @@ public class ConnectionManager {
         } 
         
         catch (SQLException ex) {
-            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return key;
     }
@@ -336,4 +337,43 @@ public class ConnectionManager {
         ArrayList<String> org = getRows1Variable("Persona", "Nombre", personName);
         return org.get(0);
     }
+    
+    public ArrayList<ArrayList<String>> getRows1VariableArray(String table, String column1, String value1){
+        
+        ArrayList<ArrayList<String>> rows = new ArrayList<>();
+        try {
+            Statement sqlStatement = connection.createStatement();
+
+            ResultSet rs = null;
+
+            String queryString = "";
+            queryString+="SELECT * FROM "+table+" WHERE "+column1+" = "+value1+";";
+
+           // System.out.println("\nQuery string:");
+           // System.out.println(queryString);
+
+            rs=sqlStatement.executeQuery(queryString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnsNumber = rsmd.getColumnCount();       
+
+            while (rs.next()) {
+                ArrayList<String> row = new ArrayList<>();
+                for(int i = 1 ; i <= columnsNumber; i++){
+                    row.add(rs.getString(i));
+                    
+                }
+                rows.add(row);
+            }
+
+            rs.close();
+            
+        } catch (SQLException ex) {
+            
+        }
+         return rows;   
+    }
+    
+    
+    
 }

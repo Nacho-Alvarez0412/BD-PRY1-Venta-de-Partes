@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,15 +15,17 @@ import java.awt.event.ActionListener;
  * @author nacho
  */
 public class OrderMenuController implements ActionListener {
-    private OrderMenu view;
+    public OrderMenu view;
     private ConnectionManager dataBaseConnection;
     private PartsByProviderController partsByProvider;
     private InsertOrderController insertOrder;
     private AddBuyToOrderController addBuy;
+    private MainMenuController previousView;
 
-    public OrderMenuController(ConnectionManager dataBaseConnection) {
+    public OrderMenuController(ConnectionManager dataBaseConnection,MainMenuController previousView) {
         view = new OrderMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView;
         init();
     }
 
@@ -40,22 +42,22 @@ public class OrderMenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
-            System.out.println("Accediendo a ventana de Insertar Ordenes");
-             insertOrder = new InsertOrderController(dataBaseConnection);
+             insertOrder = new InsertOrderController(dataBaseConnection,this);
+             view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.BuyPartsButton)){
-            System.out.println("Accediendo a ventana de Comprar Partes");
-            addBuy = new AddBuyToOrderController(dataBaseConnection);
+            addBuy = new AddBuyToOrderController(dataBaseConnection,this);
+            view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.ProviderButton)){
-            System.out.println("Accediendo a ventana de Listar Proveedores");
-            partsByProvider = new PartsByProviderController(dataBaseConnection);
+            partsByProvider = new PartsByProviderController(dataBaseConnection,this);
+            view.setVisible(false);
         }
         else if (e.getSource().equals(view.ExitButton)){
-            System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false);
+            previousView.view.setVisible(true);
         }
         
     }

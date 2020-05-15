@@ -29,7 +29,6 @@ public class DataBaseApplication {
         MainMenuController mainMenuController = new MainMenuController(url, user, password);
         
         
-        
        /* 
         try {
             

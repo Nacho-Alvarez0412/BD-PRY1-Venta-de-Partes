@@ -33,7 +33,7 @@ public class OrderManager {
         return output;
     }
     
-    public String listProvidersByPart(String partName){
+    public ArrayList<String> listProvidersByPart(String partName){
         if(!databaseConnection.errorManager.isPart(partName)){
             String partID = this.getPartID(partName);
 
@@ -48,13 +48,13 @@ public class OrderManager {
 
                 
             }
-            return providers.toString();
+            return providers;
         }
 
-        return "La parte ingresada no se encuentra en el sistema";
+        return null;
     }
     
-    public String insertOrder(String client, String date){
+    public boolean insertOrder(String client, String date){
         if(!databaseConnection.errorManager.isClient(client)){
             ArrayList<String> values = new ArrayList<String>();
 
@@ -73,14 +73,13 @@ public class OrderManager {
 
             values.add(rowInfo.get(4));
 
-            databaseConnection.insertRow(values, "Orden");
+            return !(databaseConnection.insertRow(values, "Orden") == 0);
             
-            return "Orden agregada con éxito";
         }
-        return "El cliente ingresado no existe";
+        return false;
     }
     
-    private String getProviderID(String providerName){
+    public String getProviderID(String providerName){
         ArrayList<String> row = databaseConnection.getRows1Variable("Proveedor", "Nombre", providerName);
         return row.get(1);
     }
@@ -103,32 +102,30 @@ public class OrderManager {
         return rowInfo.get(4);
     }
     
-    public String linkDetailToOrder(String client, String date, String amount, String partName, String providerName){
+    public boolean linkDetailToOrder(String client, String orderId, String amount, String partName, String providerName){
         if(!databaseConnection.errorManager.isClient(client) && !databaseConnection.errorManager.isPart(partName) && !databaseConnection.errorManager.isProvider(providerName)){
             String clientID = this.getClientID(client);
             String partID = this.getPartID(partName);
             String providerID = this.getProviderID(providerName);
             
-            if(!databaseConnection.errorManager.isOrder(clientID, date)){
+            if(!databaseConnection.errorManager.isOrder(clientID, orderId)){
             
-                String orderID = this.getOrderID(date, clientID);
-
                 ArrayList<String> values = new ArrayList<String>();
 
                 values.add(amount);
-                values.add(orderID);
+                values.add(orderId);
                 values.add(partID);
                 values.add(providerID);
                 String total =String.valueOf(getTotalAmount( partName, providerName, amount,providerID,partID));
                 databaseConnection.insertRow(values, "Detalle");
-                updateOrderPrices(orderID,total);
-                return "Detalle agregado con éxito a la órden";
+                updateOrderPrices(orderId,total);
+                return true;
                 
             }
             else
-                return "El cliente seleccionado no posee ordenes";
+                return false;
         }
-        return "Alguno de los siguientes datos: Cliente, Parte o Proveedor no se encuentran en la base de datos";
+        return false;
     }
     
     public double getTotalAmount(String partName,String providerName, String amount,String providerID,String partID){

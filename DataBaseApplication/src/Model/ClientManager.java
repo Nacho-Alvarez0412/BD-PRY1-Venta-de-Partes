@@ -177,5 +177,12 @@ public class ClientManager {
             contact = data.get(0)+","+data.get(2)+","+data.get(1);
         return contact;
     }
+    
+    public String getClientID(String cedula){
+        if(cedula.length() == 9){
+            return databaseConnection.getRows1Variable("Persona", "Cedula", cedula).get(4);
+        }
+        return databaseConnection.getRows1Variable("Organización", "Cedula", cedula).get(4);
+    }
 
 }

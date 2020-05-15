@@ -16,7 +16,7 @@ public class OrderMenu extends javax.swing.JFrame {
      */
     public OrderMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
     }
 
     /**
@@ -52,7 +52,7 @@ public class OrderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ProviderButton);
-        ProviderButton.setBounds(370, 360, 280, 50);
+        ProviderButton.setBounds(380, 440, 280, 50);
         ProviderButton.getAccessibleContext().setAccessibleDescription("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/AppTitle_1.png"))); // NOI18N
@@ -65,7 +65,7 @@ public class OrderMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Package.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(20, 210, 160, 180);
 
         BuyPartsButton.setBackground(new java.awt.Color(213, 213, 213));
         BuyPartsButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
@@ -78,7 +78,7 @@ public class OrderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BuyPartsButton);
-        BuyPartsButton.setBounds(660, 360, 220, 50);
+        BuyPartsButton.setBounds(380, 360, 280, 50);
 
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
@@ -86,12 +86,12 @@ public class OrderMenu extends javax.swing.JFrame {
         InsertButton.setText("Insertar");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(180, 360, 170, 50);
+        InsertButton.setBounds(380, 280, 280, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class OrderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(450, 460, 170, 50);
+        ExitButton.setBounds(20, 540, 170, 50);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);

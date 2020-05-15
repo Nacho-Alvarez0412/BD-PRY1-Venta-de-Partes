@@ -68,7 +68,8 @@ public class MainMenuController implements ActionListener {
         
         else if (e.getSource().equals(view.OrdenButton)){
             System.out.println("Accediendo a ventana de Ordenes");
-            orderMenu = new OrderMenuController(dataBaseConnection);
+            orderMenu = new OrderMenuController(dataBaseConnection,this);
+            view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.PartesButton)){

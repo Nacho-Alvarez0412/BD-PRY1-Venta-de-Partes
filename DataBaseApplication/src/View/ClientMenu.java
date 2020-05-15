@@ -16,7 +16,7 @@ public class ClientMenu extends javax.swing.JFrame {
      */
     public ClientMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ClientMenu extends javax.swing.JFrame {
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -100,7 +100,7 @@ public class InsertClientMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(10, 550, 170, 50);
+        ExitButton.setBounds(40, 560, 120, 40);
 
         ClientType.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         ClientType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona", "Organización" }));
@@ -243,21 +243,18 @@ public class InsertClientMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(800, 440, 120, 40);
 
-        InsertButton.setBackground(new java.awt.Color(213, 213, 213));
-
-        InsertButton.setForeground(new java.awt.Color(4, 83, 125));
+        InsertContactButton.setBackground(new java.awt.Color(213, 213, 213));
         InsertContactButton.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         InsertContactButton.setForeground(new java.awt.Color(4, 83, 125));
         InsertContactButton.setText("Insertar Contacto");
-        InsertContactButton.setToolTipText("");
-        InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        InsertContactButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertContactButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InsertContactButtonActionPerformed(evt);
             }
         });
         getContentPane().add(InsertContactButton);
-        InsertContactButton.setBounds(690, 530, 210, 50);
+        InsertContactButton.setBounds(690, 530, 190, 50);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);

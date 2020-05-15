@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,10 +26,12 @@ import java.util.logging.Logger;
 public class InsertOrderController implements ActionListener {
     private InsertOrderMenu view;
     private ConnectionManager dataBaseConnection;
+    private OrderMenuController previousView;
 
-    public InsertOrderController(ConnectionManager dataBaseConnection) {
+    public InsertOrderController(ConnectionManager dataBaseConnection,OrderMenuController previousView) {
         view = new InsertOrderMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView;
         init();
     }
 
@@ -48,16 +51,20 @@ public class InsertOrderController implements ActionListener {
             String cedula = view.CedulaText.getText();
             String fecha = "'"+view.Fecha.getText()+"'";
             
-            System.out.println(dataBaseConnection.orderManager.insertOrder(cedula,fecha));
+            if(dataBaseConnection.orderManager.insertOrder(cedula,fecha)){
+                JOptionPane.showMessageDialog(view, "Orden agregada con éxito");
+                return;
+            }
+            JOptionPane.showMessageDialog(view, "Verifique los valores ingresado e intente nuevamente");
         }
         
         else if (e.getSource().equals(view.ExitButton)){
             System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false); 
+            previousView.view.setVisible(true);
+            
         }
         
     }
-    
-    
     
 }

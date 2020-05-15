@@ -16,7 +16,7 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
      */
     public PartsByProviderMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -31,11 +31,13 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        BackgroundLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         ListButton = new javax.swing.JButton();
+        BackgroundLabel1 = new javax.swing.JLabel();
         ExitButton = new javax.swing.JButton();
-        NombreText = new javax.swing.JTextField();
+        ParteComboBox = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProveedorTable = new javax.swing.JTable();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,20 +48,16 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(370, 0, 290, 240);
 
-        BackgroundLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Background1.jpg"))); // NOI18N
-        getContentPane().add(BackgroundLabel1);
-        BackgroundLabel1.setBounds(-20, -290, 1020, 450);
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Package.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(10, 170, 140, 120);
 
         ListButton.setBackground(new java.awt.Color(213, 213, 213));
 
         ListButton.setForeground(new java.awt.Color(4, 83, 125));
         ListButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ListButton.setForeground(new java.awt.Color(4, 83, 125));
-        ListButton.setText("List");
+        ListButton.setText("Listar");
         ListButton.setToolTipText("");
         ListButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ListButton.addActionListener(new java.awt.event.ActionListener() {
@@ -68,12 +66,17 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ListButton);
-        ListButton.setBounds(580, 490, 170, 50);
+        ListButton.setBounds(840, 220, 120, 40);
+
+        BackgroundLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Background1.jpg"))); // NOI18N
+        getContentPane().add(BackgroundLabel1);
+        BackgroundLabel1.setBounds(-20, -290, 1020, 450);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
+        ExitButton.setToolTipText("");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,11 +84,45 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(840, 170, 120, 40);
 
-        NombreText.setText("Nombre");
-        getContentPane().add(NombreText);
-        NombreText.setBounds(470, 390, 200, 24);
+        ParteComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        getContentPane().add(ParteComboBox);
+        ParteComboBox.setBounds(680, 220, 140, 40);
+
+        ProveedorTable.setAutoCreateRowSorter(true);
+        ProveedorTable.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        ProveedorTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID ", "Proveedor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        ProveedorTable.setOpaque(false);
+        ProveedorTable.setRowHeight(30);
+        jScrollPane1.setViewportView(ProveedorTable);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(130, 270, 670, 320);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -270,8 +307,10 @@ public class PartsByProviderMenu extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroundLabel1;
     public javax.swing.JButton ExitButton;
     public javax.swing.JButton ListButton;
-    public javax.swing.JTextField NombreText;
+    public javax.swing.JComboBox<String> ParteComboBox;
+    public javax.swing.JTable ProveedorTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

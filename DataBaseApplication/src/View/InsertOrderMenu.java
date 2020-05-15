@@ -16,7 +16,7 @@ public class InsertOrderMenu extends javax.swing.JFrame {
      */
     public InsertOrderMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -37,6 +37,9 @@ public class InsertOrderMenu extends javax.swing.JFrame {
         ExitButton = new javax.swing.JButton();
         CedulaText = new javax.swing.JTextField();
         Fecha = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,14 +56,14 @@ public class InsertOrderMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Package.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(60, 230, 160, 180);
 
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
 
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setText("Insert");
+        InsertButton.setText("Agregar Orden");
         InsertButton.setToolTipText("");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,12 +72,12 @@ public class InsertOrderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(580, 490, 170, 50);
+        InsertButton.setBounds(430, 470, 260, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,15 +85,44 @@ public class InsertOrderMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(20, 560, 130, 40);
 
+        CedulaText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        CedulaText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         CedulaText.setText("Cedula");
         getContentPane().add(CedulaText);
-        CedulaText.setBounds(380, 390, 170, 24);
+        CedulaText.setBounds(330, 390, 210, 30);
 
-        Fecha.setText("Fecha");
+        Fecha.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        Fecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Fecha.setText("AA/MM/DD");
+        Fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FechaActionPerformed(evt);
+            }
+        });
         getContentPane().add(Fecha);
-        Fecha.setBounds(600, 390, 140, 24);
+        Fecha.setBounds(580, 390, 210, 30);
+
+        jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Fecha de la Orden");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(550, 320, 260, 60);
+
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel4.setText("Agregar Orden");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 410, 220, 60);
+
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Cédula de Cliente");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(300, 320, 260, 60);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -107,6 +139,10 @@ public class InsertOrderMenu extends javax.swing.JFrame {
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InsertButtonActionPerformed
+
+    private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,6 +442,9 @@ public class InsertOrderMenu extends javax.swing.JFrame {
     public javax.swing.JTextField Fecha;
     public javax.swing.JButton InsertButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
