@@ -29,9 +29,9 @@ public class PartManager {
         return row.get(0);
     }
     
-    public String insertPart(String partName, String nombreFabricante, String nombreMarca){
+    public boolean insertPart(String partName, String nombreFabricante, String nombreMarca){
         if(!databaseConnection.errorManager.checkPartExistence(partName))
-            return "La parte ingresada ya existe en la base de datos";
+            return false;
         if(databaseConnection.errorManager.checkPartIntegrity(nombreMarca, nombreFabricante)){
             ArrayList<String> values = new ArrayList<String>();
 
@@ -40,18 +40,18 @@ public class PartManager {
             values.add(this.getBrandID(nombreMarca));
 
             databaseConnection.insertRow(values, "Parte");
-            return "Parte agregada con éxito";
+            return true;
         }
-        return "La marca o fabricante no se encuentra en la base de datos";
+        return false;
     }
     
-    public String erasePart(String partName){
+    public boolean erasePart(String partName){
         if(databaseConnection.errorManager.checkPartDependencies(partName)){
             databaseConnection.deleteRow(partName, "NombreParte", "Parte");
-            return "Part "+partName+" deleted";
+            return true;
         }
         else{
-            return "La parte no puede ser borrada, ya que forma parte de una orden";
+            return false;
         }
     }
     
@@ -99,16 +99,16 @@ public class PartManager {
         return "Verifique los valores de parte y vehículo y vuelva a intentar";
     }
     
-    public String updatePrices(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
+    public boolean updatePrices(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
         if(!databaseConnection.errorManager.checkUpdateIntegrity(nombreProveedor, nombreParte)){
             String providerID = this.getProviderID(nombreProveedor);
             String partID = this.getPartID(nombreParte);
 
             databaseConnection.updateRow2Variables("Provision", "PrecioCompra", precioCompra,"ProveedorID", providerID, "ParteID", partID);
             databaseConnection.updateRow2Variables("Provision", "Ganancia", ganancia,"ProveedorID", providerID, "ParteID", partID);
-            return "Datos actualizados con éxito";
+            return true;
         }
-        return "Verifique los valores de parte y proveedor y vuelva a intentar";
+        return false;
     }
     
     private ArrayList<String> getPartIdByVehicle(String vehicleID){

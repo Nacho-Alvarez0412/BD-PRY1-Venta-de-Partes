@@ -61,20 +61,18 @@ public class MainMenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.ClientesButton)){
-            System.out.println("Accediendo a ventana de Clientes");
             clientMenu = new ClientMenuController(dataBaseConnection,this);
             view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.OrdenButton)){
-            System.out.println("Accediendo a ventana de Ordenes");
             orderMenu = new OrderMenuController(dataBaseConnection,this);
             view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.PartesButton)){
-            System.out.println("Accediendo a ventana de Partes");
-            partMenu = new PartMenuController(dataBaseConnection);
+            partMenu = new PartMenuController(dataBaseConnection,this);
+            view.setVisible(false);
         }
         
     }

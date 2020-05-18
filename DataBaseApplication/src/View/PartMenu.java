@@ -16,7 +16,7 @@ public class PartMenu extends javax.swing.JFrame {
      */
     public PartMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
     }
 
     /**
@@ -55,7 +55,7 @@ public class PartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DeleteButton);
-        DeleteButton.setBounds(410, 390, 190, 50);
+        DeleteButton.setBounds(190, 420, 220, 50);
         DeleteButton.getAccessibleContext().setAccessibleDescription("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/AppTitle_1.png"))); // NOI18N
@@ -82,7 +82,7 @@ public class PartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ProviderButton);
-        ProviderButton.setBounds(220, 310, 200, 50);
+        ProviderButton.setBounds(700, 340, 220, 50);
 
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
@@ -90,7 +90,7 @@ public class PartMenu extends javax.swing.JFrame {
         InsertButton.setText("Insertar");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(220, 390, 180, 50);
+        InsertButton.setBounds(190, 340, 220, 50);
 
         VehicleButton.setBackground(new java.awt.Color(213, 213, 213));
 
@@ -100,18 +100,19 @@ public class PartMenu extends javax.swing.JFrame {
         VehicleButton.setText("Automóviles");
         VehicleButton.setToolTipText("");
         VehicleButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        VehicleButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         VehicleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VehicleButtonActionPerformed(evt);
             }
         });
         getContentPane().add(VehicleButton);
-        VehicleButton.setBounds(610, 310, 210, 50);
+        VehicleButton.setBounds(440, 340, 220, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,15 +120,17 @@ public class PartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(430, 490, 170, 50);
+        ExitButton.setBounds(10, 550, 100, 50);
 
         VehicleButton.setBackground(new java.awt.Color(213, 213, 213));
 
         VehicleButton.setForeground(new java.awt.Color(4, 83, 125));
+        PreciosButton.setBackground(new java.awt.Color(213, 213, 213));
         PreciosButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         PreciosButton.setForeground(new java.awt.Color(4, 83, 125));
         PreciosButton.setText("Precios");
         PreciosButton.setToolTipText("");
+        PreciosButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         VehicleButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PreciosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,15 +138,17 @@ public class PartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PreciosButton);
-        PreciosButton.setBounds(620, 390, 200, 50);
+        PreciosButton.setBounds(440, 420, 220, 50);
 
         VehicleButton.setBackground(new java.awt.Color(213, 213, 213));
 
         VehicleButton.setForeground(new java.awt.Color(4, 83, 125));
+        ListPartButton.setBackground(new java.awt.Color(213, 213, 213));
         ListPartButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ListPartButton.setForeground(new java.awt.Color(4, 83, 125));
         ListPartButton.setText("Listar");
         ListPartButton.setToolTipText("");
+        ListPartButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         VehicleButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ListPartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +156,7 @@ public class PartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ListPartButton);
-        ListPartButton.setBounds(430, 310, 160, 50);
+        ListPartButton.setBounds(700, 420, 220, 50);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);

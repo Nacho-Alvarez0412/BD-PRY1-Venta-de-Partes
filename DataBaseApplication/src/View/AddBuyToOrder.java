@@ -116,7 +116,7 @@ public class AddBuyToOrder extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel5.setText("Seleccione una proveedor");
+        jLabel5.setText("Seleccione un proveedor");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(510, 360, 190, 50);
 

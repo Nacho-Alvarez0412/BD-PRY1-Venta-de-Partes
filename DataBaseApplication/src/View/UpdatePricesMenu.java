@@ -16,7 +16,7 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
      */
     public UpdatePricesMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -35,10 +35,17 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         LinkButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
-        NombreText = new javax.swing.JTextField();
-        ProveedorText = new javax.swing.JTextField();
-        PrecioCompra = new javax.swing.JTextField();
-        Ganancia = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        ParteComboBox = new javax.swing.JComboBox<>();
+        ProveedorComboBox = new javax.swing.JComboBox<>();
+        PrecioSpinner = new javax.swing.JSpinner();
+        GananciaSpinner = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        BuscarPartesButton = new javax.swing.JButton();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,15 +62,16 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Tool.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(70, 200, 160, 180);
 
         LinkButton.setBackground(new java.awt.Color(213, 213, 213));
 
         LinkButton.setForeground(new java.awt.Color(4, 83, 125));
         LinkButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         LinkButton.setForeground(new java.awt.Color(4, 83, 125));
-        LinkButton.setText("Link");
+        LinkButton.setText("Actualizar");
         LinkButton.setToolTipText("");
+        LinkButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         LinkButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         LinkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,12 +79,12 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(LinkButton);
-        LinkButton.setBounds(580, 490, 170, 50);
+        LinkButton.setBounds(420, 530, 200, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,23 +92,80 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(20, 540, 100, 50);
 
-        NombreText.setText("Nombre");
-        getContentPane().add(NombreText);
-        NombreText.setBounds(410, 340, 150, 24);
+        jLabel2.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel2.setText("Ganancia");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(620, 410, 90, 40);
 
-        ProveedorText.setText("Proveedor");
-        getContentPane().add(ProveedorText);
-        ProveedorText.setBounds(580, 340, 130, 24);
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel4.setText(" Precios");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(80, 430, 130, 40);
 
-        PrecioCompra.setText("Precio Compra");
-        getContentPane().add(PrecioCompra);
-        PrecioCompra.setBounds(410, 400, 140, 24);
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel5.setText("Parte");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(340, 260, 50, 40);
 
-        Ganancia.setText("Ganancia");
-        getContentPane().add(Ganancia);
-        Ganancia.setBounds(580, 400, 130, 24);
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel6.setText("Proveedor");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(620, 260, 100, 40);
+
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel7.setText("Nuevo Precio");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(310, 410, 120, 40);
+
+        ParteComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        ParteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        getContentPane().add(ParteComboBox);
+        ParteComboBox.setBounds(290, 320, 170, 50);
+
+        ProveedorComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        ProveedorComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        getContentPane().add(ProveedorComboBox);
+        ProveedorComboBox.setBounds(580, 320, 170, 50);
+
+        PrecioSpinner.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        PrecioSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        getContentPane().add(PrecioSpinner);
+        PrecioSpinner.setBounds(320, 460, 110, 40);
+
+        GananciaSpinner.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        GananciaSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        getContentPane().add(GananciaSpinner);
+        GananciaSpinner.setBounds(610, 460, 110, 40);
+
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel8.setText("Actualizar ");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(70, 390, 150, 40);
+
+        LinkButton.setBackground(new java.awt.Color(213, 213, 213));
+
+        LinkButton.setForeground(new java.awt.Color(4, 83, 125));
+        BuscarPartesButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        BuscarPartesButton.setForeground(new java.awt.Color(4, 83, 125));
+        BuscarPartesButton.setText("Buscar");
+        BuscarPartesButton.setToolTipText("");
+        BuscarPartesButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        LinkButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BuscarPartesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarPartesButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BuscarPartesButton);
+        BuscarPartesButton.setBounds(770, 320, 150, 50);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -117,6 +182,10 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
     private void LinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LinkButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LinkButtonActionPerformed
+
+    private void BuscarPartesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPartesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarPartesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,13 +256,20 @@ public class UpdatePricesMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel BackgroundLabel1;
+    public javax.swing.JButton BuscarPartesButton;
     public javax.swing.JButton ExitButton;
-    public javax.swing.JTextField Ganancia;
+    public javax.swing.JSpinner GananciaSpinner;
     public javax.swing.JButton LinkButton;
-    public javax.swing.JTextField NombreText;
-    public javax.swing.JTextField PrecioCompra;
-    public javax.swing.JTextField ProveedorText;
+    public javax.swing.JComboBox<String> ParteComboBox;
+    public javax.swing.JSpinner PrecioSpinner;
+    public javax.swing.JComboBox<String> ProveedorComboBox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

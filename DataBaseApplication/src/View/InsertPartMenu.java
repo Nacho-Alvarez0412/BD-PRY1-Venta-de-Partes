@@ -16,7 +16,7 @@ public class InsertPartMenu extends javax.swing.JFrame {
      */
     public InsertPartMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -36,8 +36,12 @@ public class InsertPartMenu extends javax.swing.JFrame {
         InsertButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
         NombreText = new javax.swing.JTextField();
-        FabricanteText = new javax.swing.JTextField();
-        MarcaText = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        MarcaComboBox = new javax.swing.JComboBox<>();
+        FabricanteComboBox = new javax.swing.JComboBox<>();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,14 +58,14 @@ public class InsertPartMenu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Tool.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 170, 160, 180);
+        jLabel3.setBounds(40, 230, 160, 180);
 
         InsertButton.setBackground(new java.awt.Color(213, 213, 213));
 
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setText("Insert");
+        InsertButton.setText("Insertar");
         InsertButton.setToolTipText("");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +74,12 @@ public class InsertPartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(580, 490, 170, 50);
+        InsertButton.setBounds(430, 540, 170, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,19 +87,47 @@ public class InsertPartMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(10, 560, 110, 40);
 
+        NombreText.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        NombreText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         NombreText.setText("Nombre");
         getContentPane().add(NombreText);
-        NombreText.setBounds(480, 340, 150, 24);
+        NombreText.setBounds(420, 310, 210, 40);
 
-        FabricanteText.setText("Fabricante");
-        getContentPane().add(FabricanteText);
-        FabricanteText.setBounds(420, 400, 130, 24);
+        jLabel2.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel2.setText("Nombre Parte");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(460, 270, 140, 30);
 
-        MarcaText.setText("Marca");
-        getContentPane().add(MarcaText);
-        MarcaText.setBounds(580, 400, 140, 24);
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel4.setText("Insertar Parte");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 420, 210, 70);
+
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Fabricante");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(340, 380, 140, 30);
+
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Marca");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(610, 380, 140, 30);
+
+        MarcaComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        getContentPane().add(MarcaComboBox);
+        MarcaComboBox.setBounds(600, 420, 170, 40);
+
+        FabricanteComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        getContentPane().add(FabricanteComboBox);
+        FabricanteComboBox.setBounds(320, 420, 170, 40);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -159,11 +191,15 @@ public class InsertPartMenu extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel BackgroundLabel1;
     public javax.swing.JButton ExitButton;
-    public javax.swing.JTextField FabricanteText;
+    public javax.swing.JComboBox<String> FabricanteComboBox;
     public javax.swing.JButton InsertButton;
-    public javax.swing.JTextField MarcaText;
+    public javax.swing.JComboBox<String> MarcaComboBox;
     public javax.swing.JTextField NombreText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

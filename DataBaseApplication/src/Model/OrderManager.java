@@ -33,6 +33,20 @@ public class OrderManager {
         return output;
     }
     
+    public ArrayList<String> listPartsByProvider(String providerID){
+        
+            ArrayList<String> partsID = getPartsID(providerID);
+            ArrayList<String> partes = new ArrayList<>();
+
+            for (String parte:partsID){
+                ArrayList<String> output = databaseConnection.getRows1Variable("Provision", "ParteID", parte);
+                partes.add(output.get(1));
+
+                
+            }
+            return partes;
+    }
+    
     public ArrayList<String> listProvidersByPart(String partName){
         if(!databaseConnection.errorManager.isPart(partName)){
             String partID = this.getPartID(partName);
@@ -141,6 +155,15 @@ public class OrderManager {
         double newMontoIVA = newMontoVenta*0.13;
         databaseConnection.updateRow("Orden", "MontoVenta", "OrdenID", orderID, String.valueOf(newMontoVenta));
         databaseConnection.updateRow("Orden", "MontoIVA", "OrdenID", orderID, String.valueOf(newMontoIVA));
+    }
+
+    private ArrayList<String> getPartsID(String providerID) {
+        ArrayList<String> row = databaseConnection.getRows1Variable("Provision", "ProveedorID", providerID);
+        ArrayList<String> output = new ArrayList<String>();
+        for (int i = 1; i < row.size(); i+=4) {
+            output.add(row.get(i));
+        }
+        return output;
     }
     
 }

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,10 +24,12 @@ import java.util.logging.Logger;
 public class DeletePartController implements ActionListener {
     private DeletePartMenu view;
     private ConnectionManager dataBaseConnection;
+    private PartMenuController previousView;
 
-    public DeletePartController(ConnectionManager dataBaseConnection) {
+    public DeletePartController(ConnectionManager dataBaseConnection,PartMenuController previousView) {
         view = new DeletePartMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView;
         init();
     }
 
@@ -36,21 +39,32 @@ public class DeletePartController implements ActionListener {
         view.ExitButton.addActionListener(this);
         view.setTitle("Menu de Partes");
         view.setVisible(true);
+        fillPartes();
         
+    }
+    
+    private void fillPartes() {
+        ArrayList<String> partes = dataBaseConnection.getColumnFromTable("Parte", "NombreParte");
+        
+        for (int i = 0 ; i < partes.size() ; i++){
+            view.ParteComboBox.addItem(partes.get(i));
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
-            System.out.println("Deleting Part");
-            String parte = view.NombreText.getText();
+            String parte = (String) view.ParteComboBox.getSelectedItem();
             
-            System.out.println(dataBaseConnection.partManager.erasePart(parte));
+            if(dataBaseConnection.partManager.erasePart(parte))
+                JOptionPane.showMessageDialog(view, "Parte eliminada con éxito");
+            else
+                JOptionPane.showMessageDialog(view, "La parte no puede ser borrada ya que forma parte de una orden");
         }
         
         else if (e.getSource().equals(view.ExitButton)){
-            System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false);   
+            previousView.view.setVisible(true);
         }
         
     }

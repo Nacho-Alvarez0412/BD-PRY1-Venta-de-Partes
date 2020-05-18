@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.ConnectionManager;
+import View.MainMenu;
 import View.PartMenu;
 import View.UpdatePricesMenu;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,8 @@ import java.awt.event.ActionListener;
  * @author nacho
  */
 public class PartMenuController implements ActionListener {
-    private PartMenu view;
+    private MainMenuController previousView;
+    public PartMenu view;
     private ConnectionManager dataBaseConnection;
     private InsertPartController insertPart;
     private DeletePartController deletePart;
@@ -25,9 +27,10 @@ public class PartMenuController implements ActionListener {
     private UpdatePricesController updatePrices;
     private ListPartController listParts;
 
-    public PartMenuController(ConnectionManager dataBaseConnection) {
+    public PartMenuController(ConnectionManager dataBaseConnection,MainMenuController previousView) {
         view = new PartMenu();
         this.dataBaseConnection = dataBaseConnection;
+        this.previousView = previousView;
         init();
     }
 
@@ -47,34 +50,34 @@ public class PartMenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.InsertButton)){
-            System.out.println("Accediendo a ventana de Insertar Partes");
-            insertPart = new InsertPartController(dataBaseConnection);
+            insertPart = new InsertPartController(dataBaseConnection,this);
+            this.view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.DeleteButton)){
-            System.out.println("Accediendo a ventana de Borrar Partes");
-            deletePart = new DeletePartController(dataBaseConnection);
+            deletePart = new DeletePartController(dataBaseConnection,this);
+            this.view.setVisible(false);
         }
         
         else if (e.getSource().equals(view.ListPartButton)){
-            System.out.println("Accediendo a ventana de Listar Partes");
             listParts = new ListPartController(dataBaseConnection);
+            this.view.setVisible(false);
         }
         else if (e.getSource().equals(view.PreciosButton)){
-            System.out.println("Accediendo a ventana de Actualizar Precios");
-            updatePrices = new UpdatePricesController(dataBaseConnection);
+            updatePrices = new UpdatePricesController(dataBaseConnection,this);
+            this.view.setVisible(false);
         } 
         else if (e.getSource().equals(view.ExitButton)){
-            System.out.println("Exiting");
-            view.setVisible(false);    
+            view.setVisible(false); 
+            previousView.view.setVisible(true);
         }
         else if (e.getSource().equals(view.ProviderButton)){
-             System.out.println("Accediendo a ventana de Asociar Proveedores con Partes"); 
              linkProvider = new LinkPartWithProviderController(dataBaseConnection);
+             this.view.setVisible(false);
         }
         else if (e.getSource().equals(view.VehicleButton)){
-             System.out.println("Accediendo a ventana de Asociar Autos con Partes");
              linkVehicle = new LinkPartWithVehicleController(dataBaseConnection);
+             this.view.setVisible(false);
         }
         
     }
