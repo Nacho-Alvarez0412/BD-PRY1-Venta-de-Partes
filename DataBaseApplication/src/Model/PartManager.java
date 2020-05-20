@@ -66,7 +66,7 @@ public class PartManager {
         return row.get(0);
     }
     
-    public String insertProvision(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
+    public boolean insertProvision(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
         if(!databaseConnection.errorManager.checkProvisionIntegrity(nombreProveedor, nombreParte)){
             ArrayList<String> values = new ArrayList<String>();
 
@@ -75,10 +75,10 @@ public class PartManager {
             values.add(precioCompra);
             values.add(ganancia);
             databaseConnection.insertRow(values, "Provision");
-            return "Relación creada con éxito";
+            return true;
         }
         
-        return "Verifique el proveedor o la parte y vuelva a intentar";
+        return false;
     }
     
     private String getVehicleID(String modelo, String año){
@@ -86,7 +86,7 @@ public class PartManager {
         return row.get(0);
     }
     
-    public String linkPartWithVehicle(String nombreParte,String modelo,String año){
+    public boolean linkPartWithVehicle(String nombreParte,String modelo,String año){
         if(!databaseConnection.errorManager.checkComposeIntegrity(modelo, año, nombreParte)){
             ArrayList<String> values = new ArrayList<>();
 
@@ -94,9 +94,9 @@ public class PartManager {
             values.add(this.getPartID(nombreParte));
 
             databaseConnection.insertRow(values, "Compone");
-            return "Relación creada con éxito";
+            return true;
         }
-        return "Verifique los valores de parte y vehículo y vuelva a intentar";
+        return false;
     }
     
     public boolean updatePrices(String nombreProveedor,String nombreParte,String precioCompra,String ganancia){
@@ -132,10 +132,30 @@ public class PartManager {
             for (int i = 0 ; i < partsID.size() ; i++){
                 parts.add(databaseConnection.getRows1Variable("Parte", "ParteID", partsID.get(i)).get(1));
             }
-
-            return parts.toString();
+            String partsInfo = getPartsInfo(parts);
+            return partsInfo;
         }
         
         return "El automóvil digitado no existe en la base de datos";
+    }
+
+    private String getPartsInfo(ArrayList<String> parts) {
+        String data = "";
+        
+        for(int i = 0 ; i<parts.size() ; i++){
+            String partID = databaseConnection.partManager.getPartID("'"+parts.get(i)+"'");
+            ArrayList<String> partInfo = databaseConnection.getRows1Variable("Parte", "ParteID", partID);
+            String fabricanteID = partInfo.get(2);
+            String marcaID = partInfo.get(3);
+            
+            data+= parts.get(i);
+            data += "\t\t";
+            data += databaseConnection.getRows1Variable("FabricantePartes", "FabricanteParteID", fabricanteID).get(1);
+            data += "\t\t\t";
+            data += databaseConnection.getRows1Variable("MarcaParte", "MarcaParteID", marcaID).get(1);
+            data += "\n";
+        }
+        
+        return data;
     }
 }

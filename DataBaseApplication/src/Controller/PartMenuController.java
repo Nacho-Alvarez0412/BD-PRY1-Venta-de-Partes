@@ -60,7 +60,7 @@ public class PartMenuController implements ActionListener {
         }
         
         else if (e.getSource().equals(view.ListPartButton)){
-            listParts = new ListPartController(dataBaseConnection);
+            listParts = new ListPartController(dataBaseConnection,this);
             this.view.setVisible(false);
         }
         else if (e.getSource().equals(view.PreciosButton)){
@@ -72,11 +72,11 @@ public class PartMenuController implements ActionListener {
             previousView.view.setVisible(true);
         }
         else if (e.getSource().equals(view.ProviderButton)){
-             linkProvider = new LinkPartWithProviderController(dataBaseConnection);
+             linkProvider = new LinkPartWithProviderController(dataBaseConnection,this);
              this.view.setVisible(false);
         }
         else if (e.getSource().equals(view.VehicleButton)){
-             linkVehicle = new LinkPartWithVehicleController(dataBaseConnection);
+             linkVehicle = new LinkPartWithVehicleController(dataBaseConnection,this);
              this.view.setVisible(false);
         }
         

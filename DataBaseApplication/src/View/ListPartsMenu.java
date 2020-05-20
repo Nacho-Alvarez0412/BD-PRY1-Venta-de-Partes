@@ -16,7 +16,7 @@ public class ListPartsMenu extends javax.swing.JFrame {
      */
     public ListPartsMenu() {
         initComponents();
-        this.setSize(995, 600);
+        this.setSize(995, 650);
         
     }
     
@@ -35,8 +35,16 @@ public class ListPartsMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         InsertButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
-        ModeloText = new javax.swing.JTextField();
-        YearText = new javax.swing.JTextField();
+        AñoComboBox = new javax.swing.JComboBox<>();
+        ModeloComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        BuscarAñoButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PartesTextArea = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +68,7 @@ public class ListPartsMenu extends javax.swing.JFrame {
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
         InsertButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         InsertButton.setForeground(new java.awt.Color(4, 83, 125));
-        InsertButton.setText("List");
+        InsertButton.setText("Listar");
         InsertButton.setToolTipText("");
         InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InsertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,12 +77,12 @@ public class ListPartsMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(InsertButton);
-        InsertButton.setBounds(580, 490, 170, 50);
+        InsertButton.setBounds(10, 490, 130, 50);
 
         ExitButton.setBackground(new java.awt.Color(213, 213, 213));
         ExitButton.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(4, 83, 125));
-        ExitButton.setText("Exit");
+        ExitButton.setText("Atrás");
         ExitButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,15 +90,71 @@ public class ListPartsMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitButton);
-        ExitButton.setBounds(370, 490, 170, 50);
+        ExitButton.setBounds(10, 550, 130, 50);
 
-        ModeloText.setText("Modelo");
-        getContentPane().add(ModeloText);
-        ModeloText.setBounds(420, 400, 130, 24);
+        AñoComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        getContentPane().add(AñoComboBox);
+        AñoComboBox.setBounds(740, 250, 150, 40);
 
-        YearText.setText("Año");
-        getContentPane().add(YearText);
-        YearText.setBounds(580, 400, 140, 24);
+        ModeloComboBox.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        getContentPane().add(ModeloComboBox);
+        ModeloComboBox.setBounds(580, 250, 150, 40);
+
+        jLabel2.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Modelo");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(630, 220, 60, 21);
+
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Año");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(780, 220, 60, 21);
+
+        InsertButton.setBackground(new java.awt.Color(213, 213, 213));
+
+        InsertButton.setForeground(new java.awt.Color(4, 83, 125));
+        BuscarAñoButton.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        BuscarAñoButton.setForeground(new java.awt.Color(4, 83, 125));
+        BuscarAñoButton.setText("Buscar Año");
+        BuscarAñoButton.setToolTipText("");
+        InsertButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BuscarAñoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarAñoButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BuscarAñoButton);
+        BuscarAñoButton.setBounds(750, 300, 120, 37);
+
+        PartesTextArea.setColumns(20);
+        PartesTextArea.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        PartesTextArea.setRows(5);
+        jScrollPane1.setViewportView(PartesTextArea);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(180, 390, 780, 210);
+
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel6.setText("Marca");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(830, 340, 60, 40);
+
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel7.setText("Nombre");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(180, 340, 80, 40);
+
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(4, 83, 125));
+        jLabel8.setText("Fabricante");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(400, 340, 110, 40);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -107,6 +171,10 @@ public class ListPartsMenu extends javax.swing.JFrame {
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InsertButtonActionPerformed
+
+    private void BuscarAñoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAñoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarAñoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,13 +243,21 @@ public class ListPartsMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> AñoComboBox;
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel BackgroundLabel1;
+    public javax.swing.JButton BuscarAñoButton;
     public javax.swing.JButton ExitButton;
     public javax.swing.JButton InsertButton;
-    public javax.swing.JTextField ModeloText;
-    public javax.swing.JTextField YearText;
+    public javax.swing.JComboBox<String> ModeloComboBox;
+    public javax.swing.JTextArea PartesTextArea;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
