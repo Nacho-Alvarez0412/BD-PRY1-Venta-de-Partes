@@ -133,25 +133,6 @@ public class ClientManager {
         String phone = databaseConnection.getRows1Variable("TelefonoPersona", "Cliente", cedula).get(0);
         return phone;
     }
-    
-    public String PersonToString(ArrayList<ArrayList<String>> data){
-        String result = "";
-        
-        for(int i = 0 ; i < data.size() ; i++){
-            for(int j = 0 ; j < data.get(i).size()-1 ; j++){
-                result += data.get(i).get(j);
-                
-                if(j == 0)
-                    result += "\t";
-                else
-                    result += "\t\t";
-            }
-            result+= getPersonNumber(data.get(i).get(0)) + "\n";
-        }
-        
-        
-        return result;
-    }
 
     public String OrganizationToString(ArrayList<ArrayList<String>> data) {
         String result = "";
@@ -183,6 +164,24 @@ public class ClientManager {
             return databaseConnection.getRows1Variable("Persona", "Cedula", cedula).get(4);
         }
         return databaseConnection.getRows1Variable("Organización", "Cedula", cedula).get(4);
+    }
+
+    public ArrayList<ArrayList<String>> formatClients(ArrayList<ArrayList<String>> personas, ArrayList<ArrayList<String>> organizaciones) {
+        ArrayList<ArrayList<String>> clientes = new ArrayList<>();
+        
+        for(int i = 0 ; i < personas.size(); i++){
+            ArrayList<String> persona = personas.get(i);
+            persona.set(4, getPersonNumber(persona.get(0)));
+            clientes.add(persona);
+        }
+        
+        for(int i = 0 ; i < organizaciones.size(); i++){
+            ArrayList<String> organizacion = organizaciones.get(i);
+            organizacion.set(4, getOrgNumber(organizacion.get(0)));
+            clientes.add(organizacion);
+        }
+        
+        return clientes;
     }
 
 }

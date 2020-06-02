@@ -32,16 +32,11 @@ public class ListClients extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         ExitButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        PersonajTextArea = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         BackgroundLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ClientsTable = new javax.swing.JTable();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,14 +60,6 @@ public class ListClients extends javax.swing.JFrame {
         getContentPane().add(ExitButton);
         ExitButton.setBounds(880, 175, 90, 35);
 
-        PersonajTextArea.setColumns(20);
-        PersonajTextArea.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        PersonajTextArea.setRows(5);
-        jScrollPane2.setViewportView(PersonajTextArea);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 330, 950, 260);
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 70, 160, 180);
@@ -86,35 +73,36 @@ public class ListClients extends javax.swing.JFrame {
         getContentPane().add(BackgroundLabel1);
         BackgroundLabel1.setBounds(-20, -290, 1020, 450);
 
-        jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel2.setText("Contacto");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(870, 290, 90, 30);
+        ClientsTable.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        ClientsTable.setForeground(new java.awt.Color(0, 0, 0));
+        ClientsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel4.setText("Cédula");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 290, 70, 30);
+            },
+            new String [] {
+                "Cédula", "Nombre", "Dirección", "Ciudad", "Contacto"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel6.setText("Nombre");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(160, 290, 80, 30);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel7.setText("Dirección");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(360, 290, 100, 30);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        ClientsTable.setRowHeight(20);
+        jScrollPane1.setViewportView(ClientsTable);
 
-        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(4, 83, 125));
-        jLabel8.setText("Ciudad");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(650, 290, 70, 30);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(3, 253, 970, 340);
 
         BackgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundLabel.setOpaque(true);
@@ -229,16 +217,11 @@ public class ListClients extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel BackgroundLabel1;
+    public javax.swing.JTable ClientsTable;
     public javax.swing.JButton ExitButton;
-    public javax.swing.JTextArea PersonajTextArea;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

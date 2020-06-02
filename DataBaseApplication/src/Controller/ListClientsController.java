@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,12 +26,13 @@ import java.util.logging.Logger;
 public class ListClientsController implements ActionListener{
     ListClients view;
     ClientMenu previousView;
+    DefaultTableModel tabla;
 
-    public ListClientsController(ClientMenu previousView,String personas,String organizaciones) {
+    public ListClientsController(ClientMenu previousView,ArrayList<ArrayList<String>> clients) {
         this.previousView = previousView;
         view = new ListClients();
-        view.PersonajTextArea.append(personas);
-        view.PersonajTextArea.append(organizaciones);
+        tabla = (DefaultTableModel) view.ClientsTable.getModel();
+        fillTable(clients);
         view.setVisible(true);
         view.ExitButton.addActionListener(this);
     }
@@ -43,6 +45,17 @@ public class ListClientsController implements ActionListener{
             view.setVisible(false);
             previousView.setVisible(true);
         
+        }
+    }
+
+    private void fillTable(ArrayList<ArrayList<String>> personas) {
+        for (int cliente = 0 ; cliente<personas.size() ; cliente++){
+            ArrayList<Object> row = new ArrayList<>();
+            
+            for(int dato = 0 ; dato<personas.get(cliente).size() ; dato++){
+                row.add(personas.get(cliente).get(dato));
+            }
+            tabla.addRow(row.toArray());
         }
     }
     

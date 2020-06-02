@@ -53,9 +53,8 @@ public class ClientMenuController implements ActionListener {
         else if (e.getSource().equals(view.ListButton)){
             ArrayList<ArrayList<String>> personas = dataBaseConnection.getTable("Persona");
             ArrayList<ArrayList<String>> organizaciones = dataBaseConnection.getTable("Organización");
-            String personasString = dataBaseConnection.clientManager.PersonToString(personas);
-            String organizacionesString = dataBaseConnection.clientManager.OrganizationToString(organizaciones);
-            ListClientsController listClient = new ListClientsController(view, personasString, organizacionesString);
+            ArrayList<ArrayList<String>> clientes = dataBaseConnection.clientManager.formatClients(personas,organizaciones);
+            ListClientsController listClient = new ListClientsController(view,clientes);
             view.setVisible(false); 
         }
         
