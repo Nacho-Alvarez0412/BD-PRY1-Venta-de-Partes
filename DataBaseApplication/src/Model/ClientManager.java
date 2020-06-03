@@ -172,16 +172,29 @@ public class ClientManager {
         for(int i = 0 ; i < personas.size(); i++){
             ArrayList<String> persona = personas.get(i);
             persona.set(4, getPersonNumber(persona.get(0)));
+            persona.add(databaseConnection.clientManager.getClientState(persona.get(0)));
             clientes.add(persona);
         }
         
         for(int i = 0 ; i < organizaciones.size(); i++){
             ArrayList<String> organizacion = organizaciones.get(i);
             organizacion.set(4, getOrgNumber(organizacion.get(0)));
+            organizacion.add(databaseConnection.clientManager.getClientState(organizacion.get(0)));
             clientes.add(organizacion);
         }
         
         return clientes;
+    }
+
+    public String getClientState(String cedula) {
+        String id;
+        if(cedula.length() == 9){
+            id = databaseConnection.getRows1Variable("Persona", "Cedula", cedula).get(4);
+        }
+        else
+            id = databaseConnection.getRows1Variable("Organización", "Cedula", cedula).get(4);
+        
+        return databaseConnection.getRows1Variable("Cliente", "ClienteID", id).get(1);
     }
 
 }

@@ -51,6 +51,13 @@ public class InsertOrderController implements ActionListener {
             String cedula = view.CedulaText.getText();
             String fecha = "'"+view.Fecha.getText()+"'";
             
+            String estado = dataBaseConnection.clientManager.getClientState(cedula);
+            
+            if(estado.equals("Suspendido")){
+                JOptionPane.showMessageDialog(view, "Cliente se encuentra suspendido, no puede realizar pedidos");
+                return;
+            }
+            
             if(dataBaseConnection.orderManager.insertOrder(cedula,fecha)){
                 JOptionPane.showMessageDialog(view, "Orden agregada con éxito");
                 return;
